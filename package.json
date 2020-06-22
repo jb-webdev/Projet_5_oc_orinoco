@@ -1,0 +1,19 @@
+{
+  "name": "orinoco",
+  "version": "1.0.0",
+  "description": "projet 5 opencalssrooms",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch css/sass/main.scss:css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jb-webdev/Projet_5_oc_orinoco.git"
+  },
+  "author": "jean-jacques boero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jb-webdev/Projet_5_oc_orinoco/issues"
+  },
+  "homepage": "https://github.com/jb-webdev/Projet_5_oc_orinoco#readme"
+}
