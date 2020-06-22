@@ -1,0 +1,16 @@
+#heading {
+    background-color: #535353;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  #h1Header {
+    font-size: $fontSizeSecondary;
+    margin-bottom: 0;
+  }
+  
+  #pHeader {
+    font-size: $fontSizePrimary;
+  }

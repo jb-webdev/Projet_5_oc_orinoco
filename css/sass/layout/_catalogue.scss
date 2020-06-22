@@ -1,0 +1,60 @@
+.h2Main {
+    text-align: center;
+    font-size: $fontSizePrimary;
+  }
+  .catalogue {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+  .boxProducs {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black ;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 200px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: stretch;
+  }
+  
+  .boxImage {
+    width: 300px;
+  }
+  .boxName {
+    @include alignItems;
+    font-size: $fontSize2;
+  }
+  .boxPrice {
+    @include alignItems;
+    font-size: $fontSize2;
+  }
+  .boxBtn {
+    @include alignItems;
+  }
+  .btnInfo {
+    @include miseEnForm;
+    font-size: 1em;
+  }
+  .btnInfo:hover {
+    @include andHover;
+  }
+  .btnInfo:active {
+    @include andActive;
+  }
+  .btnPanier {
+    @include miseEnForm;
+    margin-top: 20px;
+    font-size: 1em;
+    text-align: center;
+  }
+  .btnPanier:hover {
+    @include andHover;
+  }
+  .btnPanier:active {
+    @include andActive;
+  }
