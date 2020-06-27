@@ -1,0 +1,35 @@
+// ====================   boutons nav-bar ====================
+
+.lienMenu {
+    @include button;
+  }
+.lienMenu:hover {
+    @include buttonHover;
+    
+}
+
+.lienPanierNav{
+    @include button;
+}
+.lienPanierNav:hover {
+    @include buttonHover;
+}
+// ==================== Boutons Catalogue / Produits / Panier ====================
+
+.btnInfo {
+    @include button;
+    color: $secondary;
+}
+.btnInfo:hover {
+    @include buttonHover;
+}
+
+
+.btnPanier {
+    @include button;
+    color: $secondary;
+}
+.btnPanier:hover {
+    @include buttonHover;
+}
+

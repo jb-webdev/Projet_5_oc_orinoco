@@ -77,6 +77,7 @@ getEssai(urlApiProd).then(function(response) {
         const btnPanier = document.createElement('a');  // on cree une balise a pour le liens vers la page info produit
         btnPanier.className = "btnPanier";      // on lui donne une classe
         btnPanier.textContent= "j'achète";  // on affiche un  message
+        btnPanier.setAttribute("href", "panier.html");
         divBoxPanier.appendChild(btnPanier); // on insert notre balise a dans la div
         }  
 });   

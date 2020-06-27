@@ -34,27 +34,7 @@
     font-size: $fontSize2;
   }
   .boxBtn {
-    @include alignItems;
-  }
-  .btnInfo {
-    @include miseEnForm;
-    font-size: 1em;
-  }
-  .btnInfo:hover {
-    @include andHover;
-  }
-  .btnInfo:active {
-    @include andActive;
-  }
-  .btnPanier {
-    @include miseEnForm;
-    margin-top: 20px;
-    font-size: 1em;
-    text-align: center;
-  }
-  .btnPanier:hover {
-    @include andHover;
-  }
-  .btnPanier:active {
-    @include andActive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
