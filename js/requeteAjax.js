@@ -1,4 +1,4 @@
-//==================================== on lance la requete vers l'api avec AJAX
+//==================================== on lance la requete vers l'api avec AJAX  ==============================================================
 let urlApi = "http://localhost:3000/api/cameras";  // déclaration de la variable pour l'url choisi
 
 const get = function promiseApi () {              // declare un constante et on rentre une fonction promiseApi
@@ -11,7 +11,7 @@ const get = function promiseApi () {              // declare un constante et on 
                 if(this.status == 200){ 
                 //resolve(xhr.responseText)     // on verifie la réponse
                     resolve(JSON.parse(this.responseText)); // si c'est bon on retourne le fichier JSON parsé
-                console.log(this.responseText);         // // on verifie la réponse du fichier JSON
+                //console.log(this.responseText);         // // on verifie la réponse du fichier JSON
                 } else {
                     reject(xhr); // si il y a une erreur on rejette
                 }
@@ -22,13 +22,13 @@ const get = function promiseApi () {              // declare un constante et on 
     })
 };
 
+//==================================== on recupere les réponse notre notre requete et on affiche les réponses ======================================
 get(urlApi).then(function(response) {
-    console.log(response); // je verifie a suprimer en fin de TP 
+   // console.log(response); // je verifie a suprimer en fin de TP 
       for (i = 0; i < response.length; i++) {
             const container = document.getElementById("catalogue");           
             const newBox = document.createElement("div");
-            newBox.className = "boxProducs";
-            newBox.setAttribute("name", response[i]._id);       
+            newBox.className = "boxProducs";  
             container.appendChild(newBox);
     // insertion des images
             const newBoxImg = document.createElement('img');
@@ -46,39 +46,16 @@ get(urlApi).then(function(response) {
             newBox.appendChild(newBoxPrice);
             newBoxPrice.innerHTML += response[i].price /100 + ' ' + '€';
     // insertion d'un bouton
-            const newBoxBtn = document.createElement('div');
-            newBoxBtn.className = "boxBtn"
-            newBox.appendChild(newBoxBtn);
-            const btnInfo = document.createElement('input');
-            btnInfo.className = "btnInfo";
-            btnInfo.setAttribute("type", "button");
-            btnInfo.setAttribute("value", "Plus d'info");
-            btnInfo.setAttribute("onclick", "window.location.href = 'produits.html'");
-            newBoxBtn.appendChild(btnInfo);
-            
-            const btnPanier = document.createElement('input');
-            btnPanier.className = "btnPanier";
-            btnPanier.setAttribute("type", "button");
-            btnPanier.setAttribute("value", "J'achète");
-            newBoxBtn.appendChild(btnPanier);
+            const newBoxBtn = document.createElement('div'); // on creer une balis dic pour inserer notre bouton information
+            newBoxBtn.className = "boxBtn"  // on lui donne une classe
+            newBox.appendChild(newBoxBtn);  // on inser notre div dans la div boxProducs
+            const btnInfo = document.createElement('a');  // on cree une balise a pour le liens vers la page info produit
+            btnInfo.className = "btnInfo";      // on lui donne une classe
+            btnInfo.textContent= "Plus d'info";  // on affiche un  message
+            btnInfo.setAttribute("href", "produits.html?id=" + response[i]._id);  // on rajoutte un attribut href avec un liens et on rajoute l'id qui vient de la réponse de notre requete ajax 
+            newBoxBtn.appendChild(btnInfo); // on insert notre balise a dans la div
             }
 
-});     //a ce stade les balises 'div' sont insérées dans les balise article.
+});     //a ce stade les balises 'div' sont insérées avec les réponses de notre requete.
 
-
-
-
-            // const newBoxBtn = document.createElement('div');
-            // newBoxBtn.className = "boxBtn"
-            // newBox.appendChild(newBoxBtn);
-            // const btnInfo = document.createElement('a');
-            // btnInfo.className = "btnInfo";
-            // btnInfo.setAttribute("href", "produits.html");
-            // btnInfo.innerHTML += "Information"
-            // newBoxBtn.appendChild(btnInfo);
-            
-            // const btnPanier = document.createElement('a');
-            // btnPanier.className = "btnPanier";
-            // btnPanier.innerHTML += "Panier"
-            // newBoxBtn.appendChild(btnPanier);
 

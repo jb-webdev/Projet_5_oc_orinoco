@@ -1,0 +1,35 @@
+
+.boxSelection {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black ;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 200px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    align-content: stretch;
+}
+.boxSelectionImg {
+    width: 300px;
+  }
+.boxSelectionName {
+    @include alignItems;
+    font-size: $fontSize2;
+  }
+.boxSelectionDescription {
+    @include alignItems;
+    font-size: $fontSize2;
+}
+.boxSelectionLentilles {
+  @include alignItems;
+  font-size: $fontSize2;
+}
+.boxSelectionPrice {
+  @include alignItems;
+  font-size: $fontSize2;
+}
+.boxSelectionBtnPanier {
+    @include alignItems;
+}
