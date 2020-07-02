@@ -4,9 +4,22 @@
     display: flex;
     flex-direction: column;
     text-align: center;
+
+    margin-left: auto;
+    margin-right: auto;
+    position: fixed;
+    top: 0;
+    width: 100%;
   }
   
   #h1Header {
     font-size: $fontSizeSecondary;
     margin-bottom: 0;
+  }
+
+  .h2Main {
+    margin-top: 200px;
+  }
+  #main {
+    margin-bottom: 100px;
   }

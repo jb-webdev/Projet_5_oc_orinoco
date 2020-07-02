@@ -1,0 +1,94 @@
+.tableauPanier {
+    width: 85%;
+    border: 1px solid #00000035;
+}
+.lignePanier {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.colPanierImage {
+    @include indexpanier;
+}
+.imageDuPanier {
+    width: 200px;
+}
+.colPanierName {
+    @include indexpanier;
+}
+.colPanierOption {
+    @include indexpanier;
+}
+.colPanierPrice {
+    @include indexpanier;
+}
+.colPanierQuantite {
+    @include indexpanier;
+}
+.colPanierPrixTotal {
+    @include indexpanier;
+}
+
+.lignePanier h3 {
+    background: $colorBtn;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.inputPanier {
+    width: 100px;
+    border: 1px solid $colorBtn;
+    border-radius: 10px;
+    text-align: center;
+}
+.inputPanierTotal {
+    width: 100px;
+    border: 1px solid $colorBtn;
+    border-radius: 10px;
+    text-align: center;
+}
+.namePanier {
+    @include valeurPanier;
+}
+.optionPanier {
+    @include valeurPanier;
+}
+.pricePanier {
+    @include valeurPanier;
+}
+.inputForm {
+    height: 133px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.calcPanier {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    
+    
+}
+
+@mixin essaiTotal {
+    width: 200px;
+}
+.total {
+    @include essaiTotal;
+    text-align: end;
+}
+.resultMontant {
+    @include essaiTotal;
+}
+.inputPanierTotal {
+    margin-right: auto;
+    margin-left: auto;
+}

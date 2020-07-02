@@ -27,9 +27,9 @@ const getEssai = function promiseApiEssai () {              // declare un consta
 };
 getEssai(urlApiProd).then(function(response) {
     console.log(response);
+    console.log(response._id)
         
-    for (i = 0; i < response.lenses.length; i++) {
-        const prodSel = document.getElementById("produitSelectionner"); // je crée une const pour recuperer ma balise section avec son id
+    const prodSel = document.getElementById("produitSelectionner"); // je crée une const pour recuperer ma balise section avec son id
 
         const boxSel = document.createElement('div');  // je crée une balise div
         boxSel.className = "boxSelection";  // je lui donne un nom de class
@@ -49,7 +49,7 @@ getEssai(urlApiProd).then(function(response) {
         divBoxDescription.className = "boxSelectionDescription";
         divBoxDescription.innerHTML += response.description;
         boxSel.appendChild(divBoxDescription);
-
+        
         const divBoxLentilles = document.createElement('div');
         divBoxLentilles.className = "boxSelectionLentilles";
         boxSel.appendChild(divBoxLentilles);
@@ -59,28 +59,103 @@ getEssai(urlApiProd).then(function(response) {
         divBoxOption.innerHTML = 'Option';
         divBoxLentilles.appendChild(divBoxOption);
 
-        const divBoxLense = document.createElement('div');
-        divBoxLense.className = "lenses";
-        divBoxLense.innerHTML += response.lenses[i];
-        divBoxLentilles.appendChild(divBoxLense);
+        const divBoxInputChoice = document.createElement('div');
+        divBoxInputChoice.className = "divInputchoice";
+        divBoxOption.appendChild(divBoxInputChoice);
+        // ======== insertion des option de lentilles ====================
+    for (i = 0; i < response.lenses.length; i++) {
+        const divBoxinput = document.createElement('div');
+        divBoxinput.className = "inputSelection";
+        divBoxInputChoice.appendChild(divBoxinput);
 
-        // ======== Div Prix et btn Panier ====================
-        const divBoxPanier = document.createElement('div');
-        divBoxPanier.className = "boxSelectionBtnPanier";
-        boxSel.appendChild(divBoxPanier);
+        const divBoxLense = document.createElement('input');
+        divBoxLense.setAttribute("type", "radio");
+        divBoxLense.id = response.lenses[i];
+        divBoxLense.setAttribute("name", "lense");
+        divBoxLense.setAttribute("value", response.lenses[i]);
+        divBoxinput.appendChild(divBoxLense);
 
-        const divBoxPrice = document.createElement('div');
-        divBoxPrice.className = "boxSelectionPrice";
-        divBoxPrice.innerHTML += response.price /100 + ' ' + '€';
-        divBoxPanier.appendChild(divBoxPrice);
-
-        const btnPanier = document.createElement('a');  // on cree une balise a pour le liens vers la page info produit
-        btnPanier.className = "btnPanier";      // on lui donne une classe
-        btnPanier.textContent= "j'achète";  // on affiche un  message
-        btnPanier.setAttribute("href", "panier.html");
-        divBoxPanier.appendChild(btnPanier); // on insert notre balise a dans la div
+        const divBoxLabel = document.createElement("label");
+        divBoxLabel.className = "labelLenses";
+        divBoxLabel.setAttribute('for', response.lenses[i]);
+        divBoxLabel.innerHTML = response.lenses[i];
+        divBoxinput.appendChild(divBoxLabel);
         }  
+         // ======== Div Prix et btn Panier ====================
+         const divBoxPanier = document.createElement('div');
+         divBoxPanier.className = "boxSelectionBtnPanier";
+         boxSel.appendChild(divBoxPanier);
+ 
+         const divBoxPrice = document.createElement('div');
+         divBoxPrice.className = "boxSelectionPrice";
+         divBoxPrice.innerHTML += response.price /100 + ' ' + '€';
+         divBoxPanier.appendChild(divBoxPrice);
+ 
+         const btnPanier = document.createElement('a');  // on cree une balise a pour le liens vers la page info produit
+         btnPanier.className = "btnPanier";      // on lui donne une classe
+         btnPanier.textContent= "j'achète";  // on affiche un  message
+         btnPanier.setAttribute("href", "panier.html?id=" + response._id);
+         divBoxPanier.appendChild(btnPanier); // on insert notre balise a dans la div
 });   
-    
 
+
+
+    
+// getEssai(urlApiProd).then(function(response) {
+//     console.log(response);
+//     console.log(response._id)
+        
+//     for (i = 0; i < response.lenses.length; i++) {
+//         const prodSel = document.getElementById("produitSelectionner"); // je crée une const pour recuperer ma balise section avec son id
+
+//         const boxSel = document.createElement('div');  // je crée une balise div
+//         boxSel.className = "boxSelection";  // je lui donne un nom de class
+//         prodSel.appendChild(boxSel);        // j'insere ma div dans la section
+
+//         const divBoxSelmg = document.createElement('img');
+//         divBoxSelmg.className = 'boxSelectionImg';
+//         divBoxSelmg.src = response.imageUrl;
+//         boxSel.appendChild(divBoxSelmg);
+
+//         const divBoxName = document.createElement('div');
+//         divBoxName.className = "boxSelectionName";
+//         divBoxName.innerHTML += response.name;  // divBoxName.innerHTML += response[i].name;
+//         boxSel.appendChild(divBoxName);
+
+//         const divBoxDescription = document.createElement('div');
+//         divBoxDescription.className = "boxSelectionDescription";
+//         divBoxDescription.innerHTML += response.description;
+//         boxSel.appendChild(divBoxDescription);
+
+//         const divBoxLentilles = document.createElement('div');
+//         divBoxLentilles.className = "boxSelectionLentilles";
+//         boxSel.appendChild(divBoxLentilles);
+
+//         const divBoxOption = document.createElement('div');
+//         divBoxOption.className = 'option';
+//         divBoxOption.innerHTML = 'Option';
+//         divBoxLentilles.appendChild(divBoxOption);
+
+//         const divBoxLense = document.createElement('div');
+//         divBoxLense.className = "lenses";
+//         divBoxLense.innerHTML += response.lenses[i];
+//         divBoxLentilles.appendChild(divBoxLense);
+
+//         // ======== Div Prix et btn Panier ====================
+//         const divBoxPanier = document.createElement('div');
+//         divBoxPanier.className = "boxSelectionBtnPanier";
+//         boxSel.appendChild(divBoxPanier);
+
+//         const divBoxPrice = document.createElement('div');
+//         divBoxPrice.className = "boxSelectionPrice";
+//         divBoxPrice.innerHTML += response.price /100 + ' ' + '€';
+//         divBoxPanier.appendChild(divBoxPrice);
+
+//         const btnPanier = document.createElement('a');  // on cree une balise a pour le liens vers la page info produit
+//         btnPanier.className = "btnPanier";      // on lui donne une classe
+//         btnPanier.textContent= "j'achète";  // on affiche un  message
+//         btnPanier.setAttribute("href", "panier.html?id=" + response._id);
+//         divBoxPanier.appendChild(btnPanier); // on insert notre balise a dans la div
+//         }  
+// }); 
 

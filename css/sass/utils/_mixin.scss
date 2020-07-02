@@ -12,10 +12,10 @@
     justify-content: center;
     align-items: center;
     background: none;
-    color: #cccccc;
+    color: $colorBtnText;
     width: 130px;
     height: 50px;
-    border: 1px solid #338033;
+    border: 1px solid $colorBtn;
     text-align: center;
     text-decoration: none;
     font-size: 1em;
@@ -23,8 +23,21 @@
     transition: .6s;
 }
 @mixin buttonHover {
-    background: #338033;
+    background: $colorBtn;
     cursor: pointer;
     box-shadow: inset 2px 2px 3px rgba(165, 160, 160, 0.6),
                 inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
+
+
+@mixin indexpanier {
+    text-align: center;
+    min-width: 200px;
+}
+
+@mixin valeurPanier {
+    height: 133px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

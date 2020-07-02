@@ -4,6 +4,11 @@ footer {
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
   }
   .text-center {
     color: $secondary;
