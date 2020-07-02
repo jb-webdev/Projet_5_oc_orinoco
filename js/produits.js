@@ -54,12 +54,12 @@ getEssai(urlApiProd).then(function(response) {
         divBoxLentilles.className = "boxSelectionLentilles";
         boxSel.appendChild(divBoxLentilles);
 
-        const divBoxOption = document.createElement('div');
+        const divBoxOption = document.createElement('legend');
         divBoxOption.className = 'option';
         divBoxOption.innerHTML = 'Option';
         divBoxLentilles.appendChild(divBoxOption);
 
-        const divBoxInputChoice = document.createElement('div');
+        const divBoxInputChoice = document.createElement('fieldset');
         divBoxInputChoice.className = "divInputchoice";
         divBoxOption.appendChild(divBoxInputChoice);
         // ======== insertion des option de lentilles ====================
@@ -81,6 +81,7 @@ getEssai(urlApiProd).then(function(response) {
         divBoxLabel.innerHTML = response.lenses[i];
         divBoxinput.appendChild(divBoxLabel);
         }  
+        
          // ======== Div Prix et btn Panier ====================
          const divBoxPanier = document.createElement('div');
          divBoxPanier.className = "boxSelectionBtnPanier";
@@ -97,7 +98,10 @@ getEssai(urlApiProd).then(function(response) {
          btnPanier.setAttribute("href", "panier.html?id=" + response._id);
          divBoxPanier.appendChild(btnPanier); // on insert notre balise a dans la div
 });   
+var valeurInput = document.querySelector('input[name=lense]:checked').value;
+        console.log(valeurInput);
 
+// console.log(valeur);
 
 
     
