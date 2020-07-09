@@ -1,7 +1,13 @@
+// ==============================================================================
+//================= page  information produit ===================================
+//===============================================================================
+
+// ===================    on recupere l'id produit dans l'adresse URL =========== 
 let paramsString = new URLSearchParams(window.location.search);
 
 const id = paramsString.get("id");
-console.log(id);
+// console.log(id);
+
 //===================== je cree une requete api pour recuperer les données du produit ==========================
 let urlApiProd = "http://localhost:3000/api/cameras"+"/"+ id;  // déclaration de la variable pour l'url choisi
 
@@ -26,140 +32,233 @@ const getEssai = function promiseApiEssai () {              // declare un consta
     })
 };
 getEssai(urlApiProd).then(function(response) {
-    console.log(response);
-    console.log(response._id)
+    // console.log(response);
+    // console.log(response._id)
         
-    const prodSel = document.getElementById("produitSelectionner"); // je crée une const pour recuperer ma balise section avec son id
+    const prodSel = document.getElementById("produitSelectionner"); // je crée une constante pour recuperer ma balise section avec son id
 
         const boxSel = document.createElement('div');  // je crée une balise div
         boxSel.className = "boxSelection";  // je lui donne un nom de class
         prodSel.appendChild(boxSel);        // j'insere ma div dans la section
 
+        // === création balise pour l'image ===
         const divBoxSelmg = document.createElement('img');
         divBoxSelmg.className = 'boxSelectionImg';
         divBoxSelmg.src = response.imageUrl;
         boxSel.appendChild(divBoxSelmg);
-
-        const divBoxName = document.createElement('div');
+        
+// === création balise pour le nom du produit ===
+        const divBoxName = document.createElement('p');
         divBoxName.className = "boxSelectionName";
         divBoxName.innerHTML += response.name;  // divBoxName.innerHTML += response[i].name;
         boxSel.appendChild(divBoxName);
 
-        const divBoxDescription = document.createElement('div');
+// === création balise pour la description du produit ===
+        const divBoxDescription = document.createElement('p');
         divBoxDescription.className = "boxSelectionDescription";
         divBoxDescription.innerHTML += response.description;
         boxSel.appendChild(divBoxDescription);
-        
+
+// === création balise pour les options des lentilles ===        
         const divBoxLentilles = document.createElement('div');
         divBoxLentilles.className = "boxSelectionLentilles";
         boxSel.appendChild(divBoxLentilles);
 
-        const divBoxOption = document.createElement('legend');
+        const divBoxOption = document.createElement('p');
         divBoxOption.className = 'option';
         divBoxOption.innerHTML = 'Option';
         divBoxLentilles.appendChild(divBoxOption);
 
-        const divBoxInputChoice = document.createElement('fieldset');
-        divBoxInputChoice.className = "divInputchoice";
+        const divBoxInputChoice = document.createElement('div');
+        divBoxInputChoice.id = "divInputchoice";
         divBoxOption.appendChild(divBoxInputChoice);
-        // ======== insertion des option de lentilles ====================
+
+// ======== insertion des options des lentilles ====================
     for (i = 0; i < response.lenses.length; i++) {
         const divBoxinput = document.createElement('div');
         divBoxinput.className = "inputSelection";
         divBoxInputChoice.appendChild(divBoxinput);
 
-        const divBoxLense = document.createElement('input');
-        divBoxLense.setAttribute("type", "radio");
-        divBoxLense.id = response.lenses[i];
-        divBoxLense.setAttribute("name", "lense");
-        divBoxLense.setAttribute("value", response.lenses[i]);
-        divBoxinput.appendChild(divBoxLense);
+        // const divBoxLense = document.createElement('input');
+        // divBoxLense.setAttribute("type", "radio");
+        // divBoxLense.className = "btnRadio";
+        // divBoxLense.setAttribute("name", "lense");
+        // divBoxLense.setAttribute("value", response.lenses[i]);
+        // divBoxinput.appendChild(divBoxLense);
 
-        const divBoxLabel = document.createElement("label");
+        const divBoxLabel = document.createElement("p");
         divBoxLabel.className = "labelLenses";
-        divBoxLabel.setAttribute('for', response.lenses[i]);
+        divBoxLabel.setAttribute('name', response.lenses[i]);
         divBoxLabel.innerHTML = response.lenses[i];
         divBoxinput.appendChild(divBoxLabel);
-        }  
+    }  
         
-         // ======== Div Prix et btn Panier ====================
+// ======== Div Prix et btn Panier ====================
+
+// === création balise pour acceuilir le prix et les boutons panier ===
          const divBoxPanier = document.createElement('div');
          divBoxPanier.className = "boxSelectionBtnPanier";
          boxSel.appendChild(divBoxPanier);
- 
-         const divBoxPrice = document.createElement('div');
+
+ // === création balise pour le prix ==================
+         const divBoxPrice = document.createElement('p');
          divBoxPrice.className = "boxSelectionPrice";
-         divBoxPrice.innerHTML += response.price /100 + ' ' + '€';
+         divBoxPrice.innerHTML += "Prix : " + " " + response.price /100 + ' ' + '€';
          divBoxPanier.appendChild(divBoxPrice);
  
-         const btnPanier = document.createElement('a');  // on cree une balise a pour le liens vers la page info produit
+// === création bouton ajout au panier =================
+         const btnPanier = document.createElement('button');  // on cree une balise a pour le liens vers la page info produit
          btnPanier.className = "btnPanier";      // on lui donne une classe
-         btnPanier.textContent= "j'achète";  // on affiche un  message
-         btnPanier.setAttribute("href", "panier.html?id=" + response._id);
+         btnPanier.setAttribute("type", "button");
+         btnPanier.setAttribute("value", "acheter");// on affiche un  message
+         btnPanier.innerHTML = "ajouter";
          divBoxPanier.appendChild(btnPanier); // on insert notre balise a dans la div
-});   
-var valeurInput = document.querySelector('input[name=lense]:checked').value;
-        console.log(valeurInput);
 
-// console.log(valeur);
+// === création bouton pour suprimer du panier ==========
+         const btnPanierSup = document.createElement('button');
+         btnPanierSup.className = "btnPanierSupprimer";      
+         btnPanierSup.setAttribute("type", "button");
+         btnPanierSup.setAttribute("value", "suprimer");
+         btnPanierSup.innerHTML = "supprimer";
+         divBoxPanier.appendChild(btnPanierSup); // on insert notre balise a dans la div
+
+// =========== on recupere les valeurs pour crée notre ligne panier ============
+
+let monStockage = localStorage;
+
+document.querySelector(".btnPanier").addEventListener('click', function() {
+    localStorage.setItem('photoArticle', response.imageUrl);
+    localStorage.setItem('nameArticle', response.name);
+    localStorage.setItem('priceArticle', response.price/100);
+})
+
+});
+
+// =========================================================================== 
+// =====================   on sort de la promise AJAX ========================
+// ===========================================================================
+
+// ===========================================================================
+// ================== changement de page / nous sommes a la page panier ======
+// ===========================================================================
 
 
-    
-// getEssai(urlApiProd).then(function(response) {
-//     console.log(response);
-//     console.log(response._id)
-        
-//     for (i = 0; i < response.lenses.length; i++) {
-//         const prodSel = document.getElementById("produitSelectionner"); // je crée une const pour recuperer ma balise section avec son id
+// // ================== création de la ligne panier ==============
 
-//         const boxSel = document.createElement('div');  // je crée une balise div
-//         boxSel.className = "boxSelection";  // je lui donne un nom de class
-//         prodSel.appendChild(boxSel);        // j'insere ma div dans la section
+let locStoPhoto = localStorage.getItem('photoArticle');
+let locStoName = localStorage.getItem('nameArticle');
+let locStoPrice = localStorage.getItem('priceArticle');
 
-//         const divBoxSelmg = document.createElement('img');
-//         divBoxSelmg.className = 'boxSelectionImg';
-//         divBoxSelmg.src = response.imageUrl;
-//         boxSel.appendChild(divBoxSelmg);
+// ====== on affiche la photo de notre article ======
 
-//         const divBoxName = document.createElement('div');
-//         divBoxName.className = "boxSelectionName";
-//         divBoxName.innerHTML += response.name;  // divBoxName.innerHTML += response[i].name;
-//         boxSel.appendChild(divBoxName);
+const colImage = document.querySelector(".colPanierImage");
 
-//         const divBoxDescription = document.createElement('div');
-//         divBoxDescription.className = "boxSelectionDescription";
-//         divBoxDescription.innerHTML += response.description;
-//         boxSel.appendChild(divBoxDescription);
+const imagePanier = document.createElement('img');
+imagePanier.className = ('imageDuPanier');
+imagePanier.src += locStoPhoto;
+colImage.appendChild(imagePanier);
 
-//         const divBoxLentilles = document.createElement('div');
-//         divBoxLentilles.className = "boxSelectionLentilles";
-//         boxSel.appendChild(divBoxLentilles);
+// ====== on affiche le nom de notre article ======
 
-//         const divBoxOption = document.createElement('div');
-//         divBoxOption.className = 'option';
-//         divBoxOption.innerHTML = 'Option';
-//         divBoxLentilles.appendChild(divBoxOption);
+const colName = document.querySelector(".colPanierName");  
 
-//         const divBoxLense = document.createElement('div');
-//         divBoxLense.className = "lenses";
-//         divBoxLense.innerHTML += response.lenses[i];
-//         divBoxLentilles.appendChild(divBoxLense);
+const namePanier = document.createElement("p");
+namePanier.className = ("namePanier");
+namePanier.innerHTML = locStoName; 
+colName.appendChild(namePanier);
 
-//         // ======== Div Prix et btn Panier ====================
-//         const divBoxPanier = document.createElement('div');
-//         divBoxPanier.className = "boxSelectionBtnPanier";
-//         boxSel.appendChild(divBoxPanier);
+// ====== on affiche le prix de notre article ======
 
-//         const divBoxPrice = document.createElement('div');
-//         divBoxPrice.className = "boxSelectionPrice";
-//         divBoxPrice.innerHTML += response.price /100 + ' ' + '€';
-//         divBoxPanier.appendChild(divBoxPrice);
+const colPrice = document.querySelector(".colPanierPrice");
 
-//         const btnPanier = document.createElement('a');  // on cree une balise a pour le liens vers la page info produit
-//         btnPanier.className = "btnPanier";      // on lui donne une classe
-//         btnPanier.textContent= "j'achète";  // on affiche un  message
-//         btnPanier.setAttribute("href", "panier.html?id=" + response._id);
-//         divBoxPanier.appendChild(btnPanier); // on insert notre balise a dans la div
-//         }  
-// }); 
+const pricePanier = document.createElement("p");
+pricePanier.className = ("pricePanier");
+pricePanier.setAttribute ("value", pricePanier.innerHTML);
+pricePanier.innerHTML = locStoPrice + ' ' + '€';
+colPrice.appendChild(pricePanier);
+
+// ===========================================================================
+// ======= on affiche un formulaire pour gerer la quantite de produit commander
+// ===========================================================================
+
+// ====== on créer un block pour la quantité produit ======
+
+const colInputForm = document.querySelector(".colPanierQuantite");
+const inputForm = document.querySelector(".inputForm");
+const creatForm = document.createElement("form");
+inputForm.appendChild(creatForm);
+
+//======= on créer un input pour le bouton "-" quantité produit
+
+const inputBtnNeg = document.createElement("button");
+inputBtnNeg.className = "btnNeg";
+inputBtnNeg.setAttribute("type", "button");
+inputBtnNeg.innerHTML = "-";
+
+creatForm.appendChild(inputBtnNeg);
+
+//======= on créer un input pour le text quantité produit
+
+let inputBtnQuantite = document.createElement("p");
+inputBtnQuantite.className = "inputPanier";
+
+// === on affiche une quantité minimum pour la commande
+let calQuantite = 1; // on creer un variable pour pouvoir modifier notre quantité et la rapeller plus tard dans le code
+inputBtnQuantite.innerHTML = calQuantite;
+
+creatForm.appendChild(inputBtnQuantite);
+
+// ==== on créer un input pour le bouton "+" quantité produit
+const inputBtnPos = document.createElement("button");
+inputBtnPos.className = "btnPos";
+inputBtnPos.setAttribute("type", "button");
+inputBtnPos.innerHTML = "+";
+creatForm.appendChild(inputBtnPos);
+
+// =================== on utilise un ecouteur d'évenement pour modifier nos quantité et notre montant de ligne
+// ===== on ecoute un evenement  'click' sur le boutton '-'
+document.querySelector(".btnNeg").addEventListener("click", function() {
+    if (inputBtnQuantite.innerHTML >= 1) {
+        inputBtnQuantite.innerHTML --;
+    } 
+});
+
+// ===== on ecoute un evenement  'mouseout' sur le boutton '-'
+document.querySelector(".btnNeg").addEventListener("mouseout", function() {
+    textMontant.innerHTML = inputBtnQuantite.innerHTML * locStoPrice + ' ' + '€';
+    textMontantTotal.innerHTML = inputBtnQuantite.innerHTML * locStoPrice + ' ' + '€';
+});
+
+// ===== on ecoute un evenement  'click' sur le boutton '+'
+document.querySelector(".btnPos").addEventListener("click", function() {
+    inputBtnQuantite.innerHTML ++; 
+});
+// ===== on ecoute un evenement  'mouseout' sur le boutton '+'
+document.querySelector(".btnPos").addEventListener("mouseout", function() {
+    textMontant.innerHTML = inputBtnQuantite.innerHTML * locStoPrice + ' ' + '€';
+    textMontantTotal.innerHTML = inputBtnQuantite.innerHTML * locStoPrice + ' ' + '€';
+});
+// ====================== fin pour les boutons de quantité article ===================
+
+// === on creer une div pour le montant de la ligne =========
+
+const colPanierPrixTotal = document.querySelector(".colPanierPrixTotal");
+
+const montantLigne = document.createElement("div");
+montantLigne.className = "montantLigne";
+colPanierPrixTotal.appendChild(montantLigne);
+
+// ======== on creer une balise "p" pour afficher le montant total de la ligne
+
+const textMontant = document.createElement("p");
+textMontant.className = "ligneMontantBaliseP";
+textMontant.innerHTML =  locStoPrice * inputBtnQuantite.innerHTML + ' ' + '€';
+montantLigne.appendChild(textMontant);
+
+// =========== on affiche le resultat du montant a payer ==========
+
+const textMontantTotal = document.querySelector(".formMontantP");
+textMontantTotal.innerHTML = locStoPrice * inputBtnQuantite.innerHTML + ' ' + '€';
+
+
 

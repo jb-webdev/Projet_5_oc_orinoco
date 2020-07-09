@@ -36,12 +36,12 @@ get(urlApi).then(function(response) {
             newBox.appendChild(newBoxImg);
             newBoxImg.src = response[i].imageUrl;
     // insertion information nom de l'article
-            const newBoxName = document.createElement("div"); // on crée un element HTML
+            const newBoxName = document.createElement("p"); // on crée un element HTML
             newBoxName.className = "boxName";  // on crée une classe a la div     
             newBox.appendChild(newBoxName); // on insert la div dans la balise article
             newBoxName.innerHTML += response[i].name; // insertion de l'elements dans la balise.
     // insertion du prix de l'article
-            const newBoxPrice = document.createElement('div');
+            const newBoxPrice = document.createElement('p');
             newBoxPrice.className = "boxPrice";
             newBox.appendChild(newBoxPrice);
             newBoxPrice.innerHTML += response[i].price /100 + ' ' + '€';

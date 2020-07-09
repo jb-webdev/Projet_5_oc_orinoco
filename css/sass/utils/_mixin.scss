@@ -5,8 +5,6 @@
     align-items: center;
     width: 200px;
 }
-
-
 @mixin button {
     display: flex;
     justify-content: center;
@@ -28,16 +26,27 @@
     box-shadow: inset 2px 2px 3px rgba(165, 160, 160, 0.6),
                 inset -2px -2px 3px rgba(0, 0, 0, .6);
 }
-
-
 @mixin indexpanier {
     text-align: center;
     min-width: 200px;
+    flex: 1;
 }
-
 @mixin valeurPanier {
     height: 133px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+@mixin btnNeg {
+    background: none;
+    color: $colorBtnText;
+    border: 1px solid $colorBtn;
+    border-radius: 4px;
+    transition: .6s;
+}
+@mixin btnNegHover {
+    background: $colorBtn;
+    cursor: pointer;
+    box-shadow: inset 2px 2px 3px rgba(165, 160, 160, 0.6),
+                inset -2px -2px 3px rgba(0, 0, 0, .6);
 }

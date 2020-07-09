@@ -12,7 +12,7 @@
             <h1 id="h1Header">ORINOCO</h1>
             <div id="nav-bar">
                 <a href="index.html" class="lienMenu">Shop</a>
-                <a href="panier.html" class="lienPanierNav"><p class="panierNav">0</p><span class="fas fa-cart-arrow-down"></span></a>
+                <a href="panier.html" class="lienPanierNav"><p class="panierNav" value = "0" >0</p><span class="fas fa-cart-arrow-down"></span></a>
             </div>
 
         </header>
@@ -26,27 +26,15 @@
                     <div class="colPanierName">
                         <h3 class="name">Reférence</h3>
                     </div>
-                    <div class="colPanierOption">
-                        <h3 class="option">Option</h3>
-                    </div>
                     <div class="colPanierPrice">
                         <h3 class="Price">Prix unitaire</h3>
                     </div>
                     <div class="colPanierQuantite">
                         <h3 class="Quantite">Quantité</h3>
-                        <div class="inputForm">
-                            <form>
-                                <input type="button" class="btnNeg" value=" - " onClick="javascript:this.form.champ.value--;">
-                                <input type="text" class="inputPanier" name="champ" value="1">
-                                <input type="button" class="btnPos" value=" + " onClick="javascript:this.form.champ.value++;">
-                            </form>
-                        </div>
+                        <div class="inputForm"></div>
                     </div>
                     <div class="colPanierPrixTotal">
                         <h3 class="prixTotal">Prix total</h3>
-                        <div class="inputForm">
-                            <p class="inputPanierTotal">0</p>
-                        </div>
                     </div>
                 </div>
                 <section class="calcPanier">
@@ -54,7 +42,7 @@
                         <p class="textMontant">Montant a payer</p>
                     </div>
                     <div class="resultMontant">
-                        <p class="inputPanierTotal">0</p>
+                        <p class="formMontantP">0</p>
                     </div>
                 </section>
             </section>
@@ -70,5 +58,3 @@
         <script src="./js/panier.js"></script>
 </body>
 </html>
-
-<!-- <i class="fas fa-cart-arrow-down"></i> -->

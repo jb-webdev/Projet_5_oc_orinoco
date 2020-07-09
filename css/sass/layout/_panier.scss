@@ -8,10 +8,11 @@
     margin-right: auto;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
 }
 .colPanierImage {
     @include indexpanier;
+    flex: 1;
 }
 .imageDuPanier {
     width: 200px;
@@ -27,6 +28,13 @@
 }
 .colPanierQuantite {
     @include indexpanier;
+}
+form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 133px;
 }
 .colPanierPrixTotal {
     @include indexpanier;
@@ -44,7 +52,13 @@
     border-radius: 10px;
     text-align: center;
 }
-.inputPanierTotal {
+.ligneMontantBaliseP {
+    width: 100px;
+    border: 1px solid $colorBtn;
+    border-radius: 10px;
+    text-align: center;
+}
+.formMontantP {
     width: 100px;
     border: 1px solid $colorBtn;
     border-radius: 10px;
@@ -59,7 +73,7 @@
 .pricePanier {
     @include valeurPanier;
 }
-.inputForm {
+.montantLigne {
     height: 133px;
     display: flex;
     flex-direction: column;
@@ -73,20 +87,18 @@
     margin-right: auto;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-    
-    
+    justify-content: flex-end;  
 }
 
-@mixin essaiTotal {
-    width: 200px;
-}
 .total {
-    @include essaiTotal;
+
     text-align: end;
+    flex: 4;
 }
 .resultMontant {
-    @include essaiTotal;
+    display: flex;
+    justify-content: center;
+    flex: 1;
 }
 .inputPanierTotal {
     margin-right: auto;
