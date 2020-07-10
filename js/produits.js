@@ -64,35 +64,26 @@ getEssai(urlApiProd).then(function(response) {
         divBoxLentilles.className = "boxSelectionLentilles";
         boxSel.appendChild(divBoxLentilles);
 
-        const divBoxOption = document.createElement('p');
+//=============== modifier css avant ============
+
+
+        const divBoxOption = document.createElement('select');
         divBoxOption.className = 'option';
-        divBoxOption.innerHTML = 'Option';
+        divBoxOption.name = 'option';
         divBoxLentilles.appendChild(divBoxOption);
 
-        const divBoxInputChoice = document.createElement('div');
-        divBoxInputChoice.id = "divInputchoice";
-        divBoxOption.appendChild(divBoxInputChoice);
-
-// ======== insertion des options des lentilles ====================
-    for (i = 0; i < response.lenses.length; i++) {
-        const divBoxinput = document.createElement('div');
-        divBoxinput.className = "inputSelection";
-        divBoxInputChoice.appendChild(divBoxinput);
-
-        // const divBoxLense = document.createElement('input');
-        // divBoxLense.setAttribute("type", "radio");
-        // divBoxLense.className = "btnRadio";
-        // divBoxLense.setAttribute("name", "lense");
-        // divBoxLense.setAttribute("value", response.lenses[i]);
-        // divBoxinput.appendChild(divBoxLense);
-
-        const divBoxLabel = document.createElement("p");
-        divBoxLabel.className = "labelLenses";
-        divBoxLabel.setAttribute('name', response.lenses[i]);
-        divBoxLabel.innerHTML = response.lenses[i];
-        divBoxinput.appendChild(divBoxLabel);
-    }  
-        
+        const baliseOption = document.createElement('option');
+        baliseOption.value = 'all';
+        baliseOption.innerHTML = 'Option';
+        divBoxOption.appendChild(baliseOption);
+// ======== insertion des options des lentilles avec une boucle for ====================
+    
+for (i = 0; i < response.lenses.length; i++) {
+    const option = document.createElement('option');
+    option.innerHTML = response.lenses[i];
+    option.value = response.lenses[i];
+    divBoxOption.add(option);
+}    
 // ======== Div Prix et btn Panier ====================
 
 // === création balise pour acceuilir le prix et les boutons panier ===
@@ -130,8 +121,14 @@ document.querySelector(".btnPanier").addEventListener('click', function() {
     localStorage.setItem('photoArticle', response.imageUrl);
     localStorage.setItem('nameArticle', response.name);
     localStorage.setItem('priceArticle', response.price/100);
+    document.querySelector('.panierNav').innerHTML = "Plein";
 })
-
+document.querySelector(".btnPanierSupprimer").addEventListener('click', function() {
+    localStorage.clear('photoArticle', response.imageUrl);
+    localStorage.clear('nameArticle', response.name);
+    localStorage.clear('priceArticle', response.price/100);
+    document.querySelector('.panierNav').innerHTML = "Vide";
+})
 });
 
 // =========================================================================== 
@@ -220,21 +217,13 @@ creatForm.appendChild(inputBtnPos);
 document.querySelector(".btnNeg").addEventListener("click", function() {
     if (inputBtnQuantite.innerHTML >= 1) {
         inputBtnQuantite.innerHTML --;
+        textMontant.innerHTML = inputBtnQuantite.innerHTML * locStoPrice + ' ' + '€';
+        textMontantTotal.innerHTML = inputBtnQuantite.innerHTML * locStoPrice + ' ' + '€';
     } 
 });
-
-// ===== on ecoute un evenement  'mouseout' sur le boutton '-'
-document.querySelector(".btnNeg").addEventListener("mouseout", function() {
-    textMontant.innerHTML = inputBtnQuantite.innerHTML * locStoPrice + ' ' + '€';
-    textMontantTotal.innerHTML = inputBtnQuantite.innerHTML * locStoPrice + ' ' + '€';
-});
-
 // ===== on ecoute un evenement  'click' sur le boutton '+'
 document.querySelector(".btnPos").addEventListener("click", function() {
     inputBtnQuantite.innerHTML ++; 
-});
-// ===== on ecoute un evenement  'mouseout' sur le boutton '+'
-document.querySelector(".btnPos").addEventListener("mouseout", function() {
     textMontant.innerHTML = inputBtnQuantite.innerHTML * locStoPrice + ' ' + '€';
     textMontantTotal.innerHTML = inputBtnQuantite.innerHTML * locStoPrice + ' ' + '€';
 });

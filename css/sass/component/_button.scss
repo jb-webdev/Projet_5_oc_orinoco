@@ -55,21 +55,9 @@
 .btnPos:hover {
     @include btnNegHover;
 }
-
-.labelLenses {
-    background: none;
-    padding-top: 5px;
-    padding-right: 10px;
-    padding-left: 5px;
-    padding-bottom: 10px;
-    border: 1px solid $colorBtn;
+.option {
+    border: solid 1px $colorBtn;
     border-radius: 4px;
-    transition: .6s;
 }
-.labelLenses:hover {
-    background: $colorBtn;
-    cursor: pointer;
-    box-shadow: inset 2px 2px 3px rgba(165, 160, 160, 0.6),
-                inset -2px -2px 3px rgba(0, 0, 0, .6);
-}
+
 
