@@ -1,4 +1,3 @@
-
 .boxSelection {
   display: flex;
   flex-direction: row;
@@ -14,7 +13,7 @@
 .boxSelectionImg {
   width: 300px;
 }
-.boxSelectionName {
+.box {
   @include alignItems;
   font-size: $fontSize2;
 }
@@ -24,18 +23,7 @@
   width: 300px;
   text-align: center;
 }
-.boxSelectionLentilles {
-@include alignItems;
-font-size: $fontSize2;
-}
-.boxSelectionPrice {
-@include alignItems;
-font-size: $fontSize2;
-}
 .boxSelectionBtnPanier {
   @include alignItems;
   justify-content: space-around;
-}
-.option {
-text-align: center;
 }

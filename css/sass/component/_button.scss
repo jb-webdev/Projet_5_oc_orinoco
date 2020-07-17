@@ -1,63 +1,8 @@
-// ====================   boutons nav-bar ====================
-
-.lienMenu {
-    @include button;
-  }
-.lienMenu:hover {
-    @include buttonHover;
-    
-}
-
-.lienPanierNav{
-    @include button;
-}
-.lienPanierNav:hover {
-    @include buttonHover;
-}
 // ==================== Boutons Catalogue / Produits / Panier ====================
-
-.btnInfo {
+.btn {
     @include button;
     color: $secondary;
 }
-.btnInfo:hover {
+.btn:hover {
     @include buttonHover;
 }
-
-
-.btnPanier {
-    @include button;
-    color: $secondary;
-}
-.btnPanier:hover {
-    @include buttonHover;
-}
-
-.btnPanierSupprimer{
-    @include button;
-    color: $secondary;
-}
-.btnPanierSupprimer:hover{
-    @include buttonHover;
-}
-
-.btnNeg {
-    @include btnNeg;
-    color: $secondary;
-}
-.btnNeg:hover {
-    @include btnNegHover;
-}
-.btnPos {
-    @include btnNeg;
-    color: $secondary;
-}
-.btnPos:hover {
-    @include btnNegHover;
-}
-.option {
-    border: solid 1px $colorBtn;
-    border-radius: 4px;
-}
-
-

@@ -47,10 +47,10 @@ get(urlApi).then(function(response) {
             newBoxPrice.innerHTML += response[i].price /100 + ' ' + '€';
     // insertion d'un bouton
             const newBoxBtn = document.createElement('div'); // on creer une balis dic pour inserer notre bouton information
-            newBoxBtn.className = "boxBtn"  // on lui donne une classe
+            newBoxBtn.className = "boxBtn btn"  // on lui donne une classe
             newBox.appendChild(newBoxBtn);  // on inser notre div dans la div boxProducs
             const btnInfo = document.createElement('a');  // on cree une balise a pour le liens vers la page info produit
-            btnInfo.className = "btnInfo";      // on lui donne une classe
+            btnInfo.className = "btnInfo btn";      // on lui donne une classe
             btnInfo.textContent= "Plus d'info";  // on affiche un  message
             btnInfo.setAttribute("href", "produits.html?id=" + response[i]._id);  // on rajoutte un attribut href avec un liens et on rajoute l'id qui vient de la réponse de notre requete ajax 
             newBoxBtn.appendChild(btnInfo); // on insert notre balise a dans la div

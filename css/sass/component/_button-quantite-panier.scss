@@ -1,0 +1,14 @@
+.btnNeg {
+    @include btnNeg;
+    color: $secondary;
+}
+.btnNeg:hover {
+    @include btnNegHover;
+}
+.btnPos {
+    @include btnNeg;
+    color: $secondary;
+}
+.btnPos:hover {
+    @include btnNegHover;
+}

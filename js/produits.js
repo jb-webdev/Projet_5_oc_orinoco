@@ -49,7 +49,7 @@ getEssai(urlApiProd).then(function(response) {
         
 // === création balise pour le nom du produit ===
         const divBoxName = document.createElement('p');
-        divBoxName.className = "boxSelectionName";
+        divBoxName.className = "boxSelectionName box";
         divBoxName.innerHTML += response.name;  // divBoxName.innerHTML += response[i].name;
         boxSel.appendChild(divBoxName);
 
@@ -61,11 +61,8 @@ getEssai(urlApiProd).then(function(response) {
 
 // === création balise pour les options des lentilles ===        
         const divBoxLentilles = document.createElement('div');
-        divBoxLentilles.className = "boxSelectionLentilles";
+        divBoxLentilles.className = "boxSelectionLentilles box";
         boxSel.appendChild(divBoxLentilles);
-
-//=============== modifier css avant ============
-
 
         const divBoxOption = document.createElement('select');
         divBoxOption.className = 'option';
@@ -76,6 +73,7 @@ getEssai(urlApiProd).then(function(response) {
         baliseOption.value = 'all';
         baliseOption.innerHTML = 'Option';
         divBoxOption.appendChild(baliseOption);
+
 // ======== insertion des options des lentilles avec une boucle for ====================
     
 for (i = 0; i < response.lenses.length; i++) {
@@ -83,8 +81,10 @@ for (i = 0; i < response.lenses.length; i++) {
     option.innerHTML = response.lenses[i];
     option.value = response.lenses[i];
     divBoxOption.add(option);
-}    
+} 
+// ====================================================   
 // ======== Div Prix et btn Panier ====================
+// ====================================================
 
 // === création balise pour acceuilir le prix et les boutons panier ===
          const divBoxPanier = document.createElement('div');
@@ -93,13 +93,13 @@ for (i = 0; i < response.lenses.length; i++) {
 
  // === création balise pour le prix ==================
          const divBoxPrice = document.createElement('p');
-         divBoxPrice.className = "boxSelectionPrice";
+         divBoxPrice.className = "boxSelectionPrice box";
          divBoxPrice.innerHTML += "Prix : " + " " + response.price /100 + ' ' + '€';
          divBoxPanier.appendChild(divBoxPrice);
  
 // === création bouton ajout au panier =================
          const btnPanier = document.createElement('button');  // on cree une balise a pour le liens vers la page info produit
-         btnPanier.className = "btnPanier";      // on lui donne une classe
+         btnPanier.className = "btnPanier btn";      // on lui donne une classe
          btnPanier.setAttribute("type", "button");
          btnPanier.setAttribute("value", "acheter");// on affiche un  message
          btnPanier.innerHTML = "ajouter";
@@ -107,7 +107,7 @@ for (i = 0; i < response.lenses.length; i++) {
 
 // === création bouton pour suprimer du panier ==========
          const btnPanierSup = document.createElement('button');
-         btnPanierSup.className = "btnPanierSupprimer";      
+         btnPanierSup.className = "btnPanierSupprimer btn";      
          btnPanierSup.setAttribute("type", "button");
          btnPanierSup.setAttribute("value", "suprimer");
          btnPanierSup.innerHTML = "supprimer";
@@ -116,12 +116,62 @@ for (i = 0; i < response.lenses.length; i++) {
 // =========== on recupere les valeurs pour crée notre ligne panier ============
 
 let monStockage = localStorage;
+// console.log(monStockage); // essai rajouter vendredi 17/07/2020
+let windowImageArticle = response.imageUrl; // on crée des variables pour stocker nos donnée articles pour les réutiliser plus tard
+let windowNameArticle = response.name;
+let windowPriceArticle = response.price/100;
+
+let panier = []; // on cree une variable pour nos objets
+
+class Objs {
+    constructor (image, nom, prix) {
+        this.image = image;
+        this.name = nom;
+        this.price = prix;
+    }
+} 
+let premierObj
+let objUn;
+let objDeux;
 
 document.querySelector(".btnPanier").addEventListener('click', function() {
-    localStorage.setItem('photoArticle', response.imageUrl);
-    localStorage.setItem('nameArticle', response.name);
-    localStorage.setItem('priceArticle', response.price/100);
-    document.querySelector('.panierNav').innerHTML = "Plein";
+    
+    if (monStockage.length == 0) {
+        premierObj = new Objs (
+            windowImageArticle,
+            windowNameArticle,
+            windowPriceArticle
+        )
+        panier.push(premierObj);
+        localStorage.setItem("panier", JSON.stringify(panier));
+        console.log(panier);
+        console.log("ok le stokage etait vide maintenant il y a !" + monStockage.length);
+
+    }else if (monStockage.length > 0){
+        objUn = new Objs (
+            localStorage.getItem('photoArticle'),
+            localStorage.getItem('nameArticle'),
+            localStorage.getItem('priceArticle')
+        )
+        objDeux = new Objs (
+            windowImageArticle,
+            windowNameArticle,
+            windowPriceArticle
+        )
+
+        panier.push(objUn);
+        panier.push(objDeux);
+        localStorage.clear('photoArticle', response.imageUrl);
+        localStorage.clear('nameArticle', response.name);
+        localStorage.clear('priceArticle', response.price/100);
+        document.querySelector('.panierNav').innerHTML = "Vide";
+
+        localStorage.setItem("panier", JSON.stringify(panier));
+        console.log(monStockage);   
+
+        console.log("le stokage est plein il y a " + monStockage.length);
+        console.log(panier);
+    }
 })
 document.querySelector(".btnPanierSupprimer").addEventListener('click', function() {
     localStorage.clear('photoArticle', response.imageUrl);
@@ -129,125 +179,8 @@ document.querySelector(".btnPanierSupprimer").addEventListener('click', function
     localStorage.clear('priceArticle', response.price/100);
     document.querySelector('.panierNav').innerHTML = "Vide";
 })
-});
 
+});
 // =========================================================================== 
 // =====================   on sort de la promise AJAX ========================
 // ===========================================================================
-
-// ===========================================================================
-// ================== changement de page / nous sommes a la page panier ======
-// ===========================================================================
-
-
-// // ================== création de la ligne panier ==============
-
-let locStoPhoto = localStorage.getItem('photoArticle');
-let locStoName = localStorage.getItem('nameArticle');
-let locStoPrice = localStorage.getItem('priceArticle');
-
-// ====== on affiche la photo de notre article ======
-
-const colImage = document.querySelector(".colPanierImage");
-
-const imagePanier = document.createElement('img');
-imagePanier.className = ('imageDuPanier');
-imagePanier.src += locStoPhoto;
-colImage.appendChild(imagePanier);
-
-// ====== on affiche le nom de notre article ======
-
-const colName = document.querySelector(".colPanierName");  
-
-const namePanier = document.createElement("p");
-namePanier.className = ("namePanier");
-namePanier.innerHTML = locStoName; 
-colName.appendChild(namePanier);
-
-// ====== on affiche le prix de notre article ======
-
-const colPrice = document.querySelector(".colPanierPrice");
-
-const pricePanier = document.createElement("p");
-pricePanier.className = ("pricePanier");
-pricePanier.setAttribute ("value", pricePanier.innerHTML);
-pricePanier.innerHTML = locStoPrice + ' ' + '€';
-colPrice.appendChild(pricePanier);
-
-// ===========================================================================
-// ======= on affiche un formulaire pour gerer la quantite de produit commander
-// ===========================================================================
-
-// ====== on créer un block pour la quantité produit ======
-
-const colInputForm = document.querySelector(".colPanierQuantite");
-const inputForm = document.querySelector(".inputForm");
-const creatForm = document.createElement("form");
-inputForm.appendChild(creatForm);
-
-//======= on créer un input pour le bouton "-" quantité produit
-
-const inputBtnNeg = document.createElement("button");
-inputBtnNeg.className = "btnNeg";
-inputBtnNeg.setAttribute("type", "button");
-inputBtnNeg.innerHTML = "-";
-
-creatForm.appendChild(inputBtnNeg);
-
-//======= on créer un input pour le text quantité produit
-
-let inputBtnQuantite = document.createElement("p");
-inputBtnQuantite.className = "inputPanier";
-
-// === on affiche une quantité minimum pour la commande
-let calQuantite = 1; // on creer un variable pour pouvoir modifier notre quantité et la rapeller plus tard dans le code
-inputBtnQuantite.innerHTML = calQuantite;
-
-creatForm.appendChild(inputBtnQuantite);
-
-// ==== on créer un input pour le bouton "+" quantité produit
-const inputBtnPos = document.createElement("button");
-inputBtnPos.className = "btnPos";
-inputBtnPos.setAttribute("type", "button");
-inputBtnPos.innerHTML = "+";
-creatForm.appendChild(inputBtnPos);
-
-// =================== on utilise un ecouteur d'évenement pour modifier nos quantité et notre montant de ligne
-// ===== on ecoute un evenement  'click' sur le boutton '-'
-document.querySelector(".btnNeg").addEventListener("click", function() {
-    if (inputBtnQuantite.innerHTML >= 1) {
-        inputBtnQuantite.innerHTML --;
-        textMontant.innerHTML = inputBtnQuantite.innerHTML * locStoPrice + ' ' + '€';
-        textMontantTotal.innerHTML = inputBtnQuantite.innerHTML * locStoPrice + ' ' + '€';
-    } 
-});
-// ===== on ecoute un evenement  'click' sur le boutton '+'
-document.querySelector(".btnPos").addEventListener("click", function() {
-    inputBtnQuantite.innerHTML ++; 
-    textMontant.innerHTML = inputBtnQuantite.innerHTML * locStoPrice + ' ' + '€';
-    textMontantTotal.innerHTML = inputBtnQuantite.innerHTML * locStoPrice + ' ' + '€';
-});
-// ====================== fin pour les boutons de quantité article ===================
-
-// === on creer une div pour le montant de la ligne =========
-
-const colPanierPrixTotal = document.querySelector(".colPanierPrixTotal");
-
-const montantLigne = document.createElement("div");
-montantLigne.className = "montantLigne";
-colPanierPrixTotal.appendChild(montantLigne);
-
-// ======== on creer une balise "p" pour afficher le montant total de la ligne
-
-const textMontant = document.createElement("p");
-textMontant.className = "ligneMontantBaliseP";
-textMontant.innerHTML =  locStoPrice * inputBtnQuantite.innerHTML + ' ' + '€';
-montantLigne.appendChild(textMontant);
-
-// =========== on affiche le resultat du montant a payer ==========
-
-const textMontantTotal = document.querySelector(".formMontantP");
-textMontantTotal.innerHTML = locStoPrice * inputBtnQuantite.innerHTML + ' ' + '€';
-
-
-
