@@ -37,6 +37,9 @@
     justify-content: center;
     align-items: center;
 }
+@mixin valeurPanierBis {
+    width: auto;
+}
 @mixin btnNeg {
     background: none;
     color: $colorBtnText;

@@ -27,3 +27,31 @@
   @include alignItems;
   justify-content: space-around;
 }
+@media all and (max-width: 1265px){
+  .boxSelection {
+    width: 100%;
+  }
+}
+@media all and (max-width: 1000px){
+  .boxSelection {
+    height:  auto;
+    flex-direction: column;
+    align-items: center;
+  }
+  .boxSelectionDescription {
+    width: 100%;
+    
+  }
+  .boxSelectionBtnPanier {
+    flex-direction: row;
+    width: 100%;
+    // justify-content: space-evenly;
+  }
+}
+@media all and (max-width: 530px){
+  .boxSelectionBtnPanier {
+    flex-direction: column;
+    width: 100%;
+    // justify-content: space-evenly;
+  }
+}

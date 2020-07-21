@@ -123,16 +123,25 @@ let windowPriceArticle = response.price/100;
 
 let panier = []; // on cree une variable pour nos objets
 
-class Objs {
+class Objs {        // je cree une class pour stocker mes informations article
     constructor (image, nom, prix) {
         this.image = image;
         this.name = nom;
         this.price = prix;
     }
 } 
-let premierObj
-let objUn;
-let objDeux;
+//je declare les variables
+let premierObj;
+let deuxiemeObj;
+
+let objsUn;
+let objWindow;
+let monPanier = panier;
+
+let lectureObjet;  // on cree une variable pour recuperer notre objet du localstorage
+let objJson;  // on parse l'objet pour pouvoir le traiter
+
+// j'utilise un ecouteur d'evenements pour ajouter mes informations choisi par l'utilisateur
 
 document.querySelector(".btnPanier").addEventListener('click', function() {
     
@@ -142,45 +151,118 @@ document.querySelector(".btnPanier").addEventListener('click', function() {
             windowNameArticle,
             windowPriceArticle
         )
-        panier.push(premierObj);
-        localStorage.setItem("panier", JSON.stringify(panier));
-        console.log(panier);
-        console.log("ok le stokage etait vide maintenant il y a !" + monStockage.length);
+        panier.push(premierObj); // je pousse les info pour creer mon objet avec la classe Objs
 
-    }else if (monStockage.length > 0){
-        objUn = new Objs (
-            localStorage.getItem('photoArticle'),
-            localStorage.getItem('nameArticle'),
-            localStorage.getItem('priceArticle')
-        )
-        objDeux = new Objs (
+        localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier"
+        
+        lectureObjet = localStorage.getItem("panier"); // je recupere les informations avec la methode get pour controler la presernce de mon objet dans le localStorage
+        objJson = JSON.parse(lectureObjet); // je parse les info pour pouvoir les trater
+        // console.log(objJson[0].name); // on controle que l'on recupere bien le nom de l'objet
+        // console.log(objJson);
+        // console.log(lectureObjet);
+        // console.log(objJson[0].name);
+        // console.log(monStockage.length);
+
+    }else if (monStockage.length > 0) {
+        lectureObjet = localStorage.getItem("panier"); // je recupere les informations avec la methode get pour controler la presernce de mon objet dans le localStorage
+        objJson = JSON.parse(lectureObjet); // je parse les infos pour pouvoir les trater
+        // console.log(objJson);
+        for(i = 0 ; i < objJson.length; i++) {
+            objsUn = new Objs (
+                objJson[i].image,
+                objJson[i].name,
+                objJson[i].price
+            )
+            panier.push(objsUn);
+        }
+        // console.log(objsUn);
+        deuxiemeObj = new Objs (
             windowImageArticle,
             windowNameArticle,
             windowPriceArticle
         )
-
-        panier.push(objUn);
-        panier.push(objDeux);
-        localStorage.clear('photoArticle', response.imageUrl);
-        localStorage.clear('nameArticle', response.name);
-        localStorage.clear('priceArticle', response.price/100);
-        document.querySelector('.panierNav').innerHTML = "Vide";
-
-        localStorage.setItem("panier", JSON.stringify(panier));
-        console.log(monStockage);   
-
-        console.log("le stokage est plein il y a " + monStockage.length);
-        console.log(panier);
+        panier.push(deuxiemeObj);
+        localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier"
+        // console.log(panier);  
     }
 })
-document.querySelector(".btnPanierSupprimer").addEventListener('click', function() {
-    localStorage.clear('photoArticle', response.imageUrl);
-    localStorage.clear('nameArticle', response.name);
-    localStorage.clear('priceArticle', response.price/100);
-    document.querySelector('.panierNav').innerHTML = "Vide";
-})
+    document.querySelector(".btnPanierSupprimer").addEventListener('click', function() {
+        localStorage.clear('panier');
+        document.querySelector('.panierNav').innerHTML = "Vide";
+    })
 
 });
 // =========================================================================== 
 // =====================   on sort de la promise AJAX ========================
 // ===========================================================================
+
+
+// ===========================================================================
+// ================== Sauvegarde code fonctionnel  ===========================
+// ===========================================================================
+
+
+// let monStockage = localStorage;
+// // console.log(monStockage); // essai rajouter vendredi 17/07/2020
+// let windowImageArticle = response.imageUrl; // on crée des variables pour stocker nos donnée articles pour les réutiliser plus tard
+// let windowNameArticle = response.name;
+// let windowPriceArticle = response.price/100;
+
+// let panier = []; // on cree une variable pour nos objets
+
+// class Objs {
+//     constructor (image, nom, prix) {
+//         this.image = image;
+//         this.name = nom;
+//         this.price = prix;
+//     }
+// } 
+// let premierObj
+// let objUn;
+// let objDeux;
+
+// document.querySelector(".btnPanier").addEventListener('click', function() {
+    
+//     if (monStockage.length == 0) {
+//         premierObj = new Objs (
+//             windowImageArticle,
+//             windowNameArticle,
+//             windowPriceArticle
+//         )
+//         panier.push(premierObj);
+//         localStorage.setItem("panier", JSON.stringify(panier));
+//         console.log(panier);
+//         console.log("ok le stokage etait vide maintenant il y a !" + monStockage.length);
+
+//     }else if (monStockage.length > 0){
+//         objUn = new Objs (
+//             localStorage.getItem('photoArticle'),
+//             localStorage.getItem('nameArticle'),
+//             localStorage.getItem('priceArticle')
+//         )
+//         objDeux = new Objs (
+//             windowImageArticle,
+//             windowNameArticle,
+//             windowPriceArticle
+//         )
+
+//         panier.push(objUn);
+//         panier.push(objDeux);
+//         localStorage.clear('photoArticle', response.imageUrl);
+//         localStorage.clear('nameArticle', response.name);
+//         localStorage.clear('priceArticle', response.price/100);
+//         document.querySelector('.panierNav').innerHTML = "Vide";
+
+//         localStorage.setItem("panier", JSON.stringify(panier));
+//         console.log(monStockage);   
+
+//         console.log("le stokage est plein il y a " + monStockage.length);
+//         console.log(panier);
+//     }
+// })
+// document.querySelector(".btnPanierSupprimer").addEventListener('click', function() {
+//     localStorage.clear('photoArticle', response.imageUrl);
+//     localStorage.clear('nameArticle', response.name);
+//     localStorage.clear('priceArticle', response.price/100);
+//     document.querySelector('.panierNav').innerHTML = "Vide";
+// })

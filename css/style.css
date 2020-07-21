@@ -153,9 +153,28 @@ body {
 .boxBtn {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-self: center;
 }
 
+@media all and (max-width: 1200px) {
+  .catalogue {
+    width: 100%;
+  }
+
+  .boxProducs {
+    width: 100%;
+    margin-left: 0%;
+    margin-left: 0%;
+    justify-content: space-around;
+  }
+}
+@media all and (max-width: 680px) {
+  .boxProducs {
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+}
 .boxSelection {
   display: flex;
   flex-direction: row;
@@ -202,6 +221,33 @@ body {
   justify-content: space-around;
 }
 
+@media all and (max-width: 1265px) {
+  .boxSelection {
+    width: 100%;
+  }
+}
+@media all and (max-width: 1000px) {
+  .boxSelection {
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .boxSelectionDescription {
+    width: 100%;
+  }
+
+  .boxSelectionBtnPanier {
+    flex-direction: row;
+    width: 100%;
+  }
+}
+@media all and (max-width: 530px) {
+  .boxSelectionBtnPanier {
+    flex-direction: column;
+    width: 100%;
+  }
+}
 .tableauPanier {
   width: 85%;
   border: 1px solid #00000035;
@@ -346,6 +392,24 @@ form {
   margin-left: auto;
 }
 
+@media all and (max-width: 1250px) {
+  .lignePanier {
+    width: 100%;
+  }
+}
+@media all and (max-width: 1100px) {
+  .namePanier {
+    width: auto;
+  }
+
+  .optionPanier {
+    width: auto;
+  }
+
+  .pricePanier {
+    width: auto;
+  }
+}
 footer {
   background-color: #535353;
   display: flex;
@@ -370,6 +434,12 @@ footer {
   font-size: 1.4em;
   text-decoration: none;
   color: #080808;
+}
+
+@media all and (max-width: 680px) {
+  #footer a {
+    font-size: 1em;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

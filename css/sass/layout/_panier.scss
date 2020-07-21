@@ -91,7 +91,6 @@ form {
 }
 
 .total {
-
     text-align: end;
     flex: 4;
 }
@@ -104,3 +103,19 @@ form {
     margin-right: auto;
     margin-left: auto;
 }
+@media all and (max-width: 1250px){
+    .lignePanier {
+        width: 100%;
+    }
+  }
+  @media all and (max-width: 1100px){
+    .namePanier {
+        @include valeurPanierBis;
+    }
+    .optionPanier {
+        @include valeurPanierBis;
+    }
+    .pricePanier {
+        @include valeurPanierBis;
+    }
+  }

@@ -21,3 +21,8 @@ footer {
     text-decoration: none;
     color: $secondary;
   }
+  @media all and (max-width: 680px){
+    #footer a {
+      font-size: 1em;
+    }
+  }
