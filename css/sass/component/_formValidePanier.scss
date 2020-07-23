@@ -1,0 +1,68 @@
+.formValPan {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+}
+@mixin sizeLabelValidPanier{
+    width: 250px;
+    border: 1px solid $colorBtn;
+    border-radius: 4px;
+}
+@mixin boxFormValidPan{
+    width: 100%;
+    margin-bottom: 15px;
+    text-align: start;
+}
+.boxFormNom{
+    @include boxFormValidPan;
+}
+.inputBoxFormNom{
+    @include sizeLabelValidPanier;
+}
+.boxFormPrenom{
+    @include boxFormValidPan;
+}
+.inputBoxFormPrenom{
+    @include sizeLabelValidPanier;
+}
+.boxFormAdresse{
+    @include boxFormValidPan;
+}
+.inputBoxFormAdresse{
+    @include sizeLabelValidPanier;
+}
+.boxFormVille{
+    @include boxFormValidPan;
+}
+.inputBoxFormVille{
+    @include sizeLabelValidPanier;
+}
+.boxFormEmail{
+    @include boxFormValidPan;
+}
+.inputBoxFormEmail{
+    @include sizeLabelValidPanier;
+}
+.inputBtnValidForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    
+    width: 100%;
+    height: 30px;
+    border: 1px solid $colorBtn;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1em;
+    border-radius: 4px;
+    transition: .6s;
+    margin-right: auto;
+    margin-left: auto;
+}
+.inputBtnValidForm:hover{
+    @include buttonHover;
+}

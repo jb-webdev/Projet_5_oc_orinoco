@@ -32,9 +32,7 @@ const getEssai = function promiseApiEssai () {              // declare un consta
     })
 };
 getEssai(urlApiProd).then(function(response) {
-    // console.log(response);
-    // console.log(response._id)
-        
+ 
     const prodSel = document.getElementById("produitSelectionner"); // je crée une constante pour recuperer ma balise section avec son id
 
         const boxSel = document.createElement('div');  // je crée une balise div
@@ -142,9 +140,9 @@ let lectureObjet;  // on cree une variable pour recuperer notre objet du localst
 let objJson;  // on parse l'objet pour pouvoir le traiter
 
 // j'utilise un ecouteur d'evenements pour ajouter mes informations choisi par l'utilisateur
+// let valeurPanier = document.querySelector('.panierNav').innerHTML = 0;
 
 document.querySelector(".btnPanier").addEventListener('click', function() {
-    
     if (monStockage.length == 0) {
         premierObj = new Objs (
             windowImageArticle,
@@ -154,19 +152,12 @@ document.querySelector(".btnPanier").addEventListener('click', function() {
         panier.push(premierObj); // je pousse les info pour creer mon objet avec la classe Objs
 
         localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier"
-        
         lectureObjet = localStorage.getItem("panier"); // je recupere les informations avec la methode get pour controler la presernce de mon objet dans le localStorage
         objJson = JSON.parse(lectureObjet); // je parse les info pour pouvoir les trater
-        // console.log(objJson[0].name); // on controle que l'on recupere bien le nom de l'objet
-        // console.log(objJson);
-        // console.log(lectureObjet);
-        // console.log(objJson[0].name);
-        // console.log(monStockage.length);
-
+        
     }else if (monStockage.length > 0) {
         lectureObjet = localStorage.getItem("panier"); // je recupere les informations avec la methode get pour controler la presernce de mon objet dans le localStorage
         objJson = JSON.parse(lectureObjet); // je parse les infos pour pouvoir les trater
-        // console.log(objJson);
         for(i = 0 ; i < objJson.length; i++) {
             objsUn = new Objs (
                 objJson[i].image,
@@ -175,94 +166,23 @@ document.querySelector(".btnPanier").addEventListener('click', function() {
             )
             panier.push(objsUn);
         }
-        // console.log(objsUn);
         deuxiemeObj = new Objs (
             windowImageArticle,
             windowNameArticle,
             windowPriceArticle
         )
         panier.push(deuxiemeObj);
-        localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier"
-        // console.log(panier);  
+        localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier" 
     }
+    console.log(objJson);
+    console.log(objJson.length);
 })
     document.querySelector(".btnPanierSupprimer").addEventListener('click', function() {
         localStorage.clear('panier');
-        document.querySelector('.panierNav').innerHTML = "Vide";
+        document.querySelector('.panierNav').innerHTML = "0";
     })
 
 });
 // =========================================================================== 
 // =====================   on sort de la promise AJAX ========================
 // ===========================================================================
-
-
-// ===========================================================================
-// ================== Sauvegarde code fonctionnel  ===========================
-// ===========================================================================
-
-
-// let monStockage = localStorage;
-// // console.log(monStockage); // essai rajouter vendredi 17/07/2020
-// let windowImageArticle = response.imageUrl; // on crée des variables pour stocker nos donnée articles pour les réutiliser plus tard
-// let windowNameArticle = response.name;
-// let windowPriceArticle = response.price/100;
-
-// let panier = []; // on cree une variable pour nos objets
-
-// class Objs {
-//     constructor (image, nom, prix) {
-//         this.image = image;
-//         this.name = nom;
-//         this.price = prix;
-//     }
-// } 
-// let premierObj
-// let objUn;
-// let objDeux;
-
-// document.querySelector(".btnPanier").addEventListener('click', function() {
-    
-//     if (monStockage.length == 0) {
-//         premierObj = new Objs (
-//             windowImageArticle,
-//             windowNameArticle,
-//             windowPriceArticle
-//         )
-//         panier.push(premierObj);
-//         localStorage.setItem("panier", JSON.stringify(panier));
-//         console.log(panier);
-//         console.log("ok le stokage etait vide maintenant il y a !" + monStockage.length);
-
-//     }else if (monStockage.length > 0){
-//         objUn = new Objs (
-//             localStorage.getItem('photoArticle'),
-//             localStorage.getItem('nameArticle'),
-//             localStorage.getItem('priceArticle')
-//         )
-//         objDeux = new Objs (
-//             windowImageArticle,
-//             windowNameArticle,
-//             windowPriceArticle
-//         )
-
-//         panier.push(objUn);
-//         panier.push(objDeux);
-//         localStorage.clear('photoArticle', response.imageUrl);
-//         localStorage.clear('nameArticle', response.name);
-//         localStorage.clear('priceArticle', response.price/100);
-//         document.querySelector('.panierNav').innerHTML = "Vide";
-
-//         localStorage.setItem("panier", JSON.stringify(panier));
-//         console.log(monStockage);   
-
-//         console.log("le stokage est plein il y a " + monStockage.length);
-//         console.log(panier);
-//     }
-// })
-// document.querySelector(".btnPanierSupprimer").addEventListener('click', function() {
-//     localStorage.clear('photoArticle', response.imageUrl);
-//     localStorage.clear('nameArticle', response.name);
-//     localStorage.clear('priceArticle', response.price/100);
-//     document.querySelector('.panierNav').innerHTML = "Vide";
-// })

@@ -1,33 +1,76 @@
-.tableauPanier {
-    width: 85%;
-    border: 1px solid #00000035;
-}
-.lignePanier {
-    width: 80%;
+#tableauPanier {
+    width: 1000px;
     margin-left: auto;
     margin-right: auto;
+}
+.indexLignePanier {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
+    width: 100%;
+    background-color: $colorBtn;
+    border-radius: 4px;
 }
-.colPanierImage {
-    @include indexpanier;
-    flex: 1;
+.titrePanImage {
+    @include alignDivPanier;
+}
+.namePanImage {
+    @include alignDivPanier;
+}
+.pricePanImage {
+    @include alignDivPanier;
+}
+.colPanierQuantite {
+    @include alignDivPanier;
+}
+.colPanierPrixTotal {
+    @include alignDivPanier;
+}
+
+
+.ligneArticlePanier {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-between;
+    margin-top: 5px;
+    
 }
 .imageDuPanier {
     width: 200px;
+    border-radius: 15px;
 }
-.colPanierName {
-    @include indexpanier;
+
+.divNamePanier {
+    @include alignDivPanier;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.colPanierOption {
-    @include indexpanier;
+
+.divPricePanier{
+   @include alignDivPanier;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.colPanierPrice {
-    @include indexpanier;
+.formPanier{
+    @include alignDivPanier;
 }
-.colPanierQuantite {
-    @include indexpanier;
+.montantLigne{
+    @include alignDivPanier;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputPanier{
+    width: 100px;
+    text-align: center;
+    border-radius: 4px;
+    border: solid 1px $colorBtn;
 }
 form {
     display: flex;
@@ -36,86 +79,66 @@ form {
     justify-content: center;
     height: 133px;
 }
-.colPanierPrixTotal {
-    @include indexpanier;
-}
-
-.lignePanier h3 {
-    background: $colorBtn;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
-.inputPanier {
-    width: 100px;
-    border: 1px solid $colorBtn;
-    border-radius: 10px;
-    text-align: center;
-}
-.ligneMontantBaliseP {
-    width: 100px;
-    border: 1px solid $colorBtn;
-    border-radius: 10px;
-    text-align: center;
-}
-.formMontantP {
-    width: 100px;
-    border: 1px solid $colorBtn;
-    border-radius: 10px;
-    text-align: center;
-}
-.namePanier {
-    @include valeurPanier;
-}
-.optionPanier {
-    @include valeurPanier;
-}
-.pricePanier {
-    @include valeurPanier;
-}
-.montantLigne {
-    height: 133px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
 .calcPanier {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;  
+    margin-top: 5px;
 }
-
 .total {
-    text-align: end;
     flex: 4;
+    text-align: end;
+    background-color: $colorBtn ;
+    padding-right: 30px;
+    margin-bottom: 50px;
+    border-radius: 4px;
 }
 .resultMontant {
-    display: flex;
-    justify-content: center;
-    flex: 1;
+    width: 200px;
+    text-align: center;
 }
-.inputPanierTotal {
-    margin-right: auto;
-    margin-left: auto;
-}
-@media all and (max-width: 1250px){
-    .lignePanier {
-        width: 100%;
-    }
-  }
-  @media all and (max-width: 1100px){
-    .namePanier {
-        @include valeurPanierBis;
-    }
-    .optionPanier {
-        @include valeurPanierBis;
-    }
-    .pricePanier {
-        @include valeurPanierBis;
-    }
-  }
+
+
+// @media all and (max-width: 1266px){
+//     .lignePanier {
+//         width: 100%;
+//     }
+//     .btnValidPanier {
+//         width: 100%;
+//         margin-right: auto;
+//         margin-left: auto;
+//     }
+//     .colPanierName {
+//         @include withAuto;
+//     }
+//     .colPanierPrice {
+//         @include withAuto;
+//     }
+//     .colPanierQuantite {
+//         @include withAuto;
+//     }
+//     .colPanierPrixTotal {
+//         @include withAuto;
+//     }
+//   }
+// @media all and (max-width: 1100px){
+//     .namePanier {
+//         @include valeurPanierBis;
+//     }
+//     .optionPanier {
+//         @include valeurPanierBis;
+//     }
+//     .pricePanier {
+//         @include valeurPanierBis;
+//     }
+// }
+// @media all and (max-width: 900px){
+//     .inputPanier {
+//         width: 50px;
+//     }
+// }
+// @media all and (max-width: 750px){
+//     .imageDuPanier {
+//         max-width: 200px;
+//         min-width: auto;
+//     }
+// }
