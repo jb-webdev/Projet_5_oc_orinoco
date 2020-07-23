@@ -42,6 +42,8 @@ getEssai(urlApiProd).then(function(response) {
         // === création balise pour l'image ===
         const divBoxSelmg = document.createElement('img');
         divBoxSelmg.className = 'boxSelectionImg';
+        divBoxSelmg.setAttribute("alt", response.name);
+        divBoxSelmg.setAttribute("title", "super appareil photo" + " " + response.name);
         divBoxSelmg.src = response.imageUrl;
         boxSel.appendChild(divBoxSelmg);
         
@@ -125,10 +127,13 @@ class Objs {        // je cree une class pour stocker mes informations article
     constructor (image, nom, prix) {
         this.image = image;
         this.name = nom;
-        this.price = prix;
+        this.price = prix
     }
 } 
 //je declare les variables
+let quantiteArt;
+let lectureQuantite;
+let recupQuantiteLocal;
 let premierObj;
 let deuxiemeObj;
 
@@ -138,6 +143,10 @@ let monPanier = panier;
 
 let lectureObjet;  // on cree une variable pour recuperer notre objet du localstorage
 let objJson;  // on parse l'objet pour pouvoir le traiter
+
+// affichage quantite panier panier
+
+document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
 
 // j'utilise un ecouteur d'evenements pour ajouter mes informations choisi par l'utilisateur
 // let valeurPanier = document.querySelector('.panierNav').innerHTML = 0;
@@ -150,11 +159,15 @@ document.querySelector(".btnPanier").addEventListener('click', function() {
             windowPriceArticle
         )
         panier.push(premierObj); // je pousse les info pour creer mon objet avec la classe Objs
-
         localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier"
         lectureObjet = localStorage.getItem("panier"); // je recupere les informations avec la methode get pour controler la presernce de mon objet dans le localStorage
         objJson = JSON.parse(lectureObjet); // je parse les info pour pouvoir les trater
-        
+
+        // on affiche la quantite au panier
+        localStorage.setItem("quantite", 1);
+        lectureQuantite = localStorage.getItem("quantite");
+        document.querySelector('.panierNav').innerHTML = lectureQuantite;
+
     }else if (monStockage.length > 0) {
         lectureObjet = localStorage.getItem("panier"); // je recupere les informations avec la methode get pour controler la presernce de mon objet dans le localStorage
         objJson = JSON.parse(lectureObjet); // je parse les infos pour pouvoir les trater
@@ -173,9 +186,13 @@ document.querySelector(".btnPanier").addEventListener('click', function() {
         )
         panier.push(deuxiemeObj);
         localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier" 
+        recupQuantiteLocal = localStorage.getItem("quantite"),
+
+        // console.log(recupQuantiteLocal);
+        recupQuantiteLocal ++;
+        localStorage.setItem("quantite", recupQuantiteLocal);
+        document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
     }
-    console.log(objJson);
-    console.log(objJson.length);
 })
     document.querySelector(".btnPanierSupprimer").addEventListener('click', function() {
         localStorage.clear('panier');

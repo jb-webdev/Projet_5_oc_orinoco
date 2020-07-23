@@ -33,6 +33,8 @@ get(urlApi).then(function(response) {
     // insertion des images
             const newBoxImg = document.createElement('img');
             newBoxImg.className = "boxImage";
+            newBoxImg.setAttribute("alt", response[i].name);
+            newBoxImg.setAttribute("title", "super appareil photo" + " " + response[i].name);
             newBox.appendChild(newBoxImg);
             newBoxImg.src = response[i].imageUrl;
     // insertion information nom de l'article
@@ -57,5 +59,6 @@ get(urlApi).then(function(response) {
             }
 
 });     //a ce stade les balises 'div' sont insérées avec les réponses de notre requete.
+document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
 
 

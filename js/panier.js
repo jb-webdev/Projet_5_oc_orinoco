@@ -5,12 +5,14 @@
 // // ================== création de la ligne panier ==============
 let messageLignePanier;
 let lectureObjet = localStorage.getItem("panier"); // on cree une variable pour recuperer notre objet du localstorage
+// on affiche la quantite d'article dans le panier
+document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
+
 
 let objJson = JSON.parse(lectureObjet); // on parse l'objet pour pouvoir le traiter
 // console.log(objJson[0].name); // on controle que l'on recupere l'e nom de l'objet numero 1
 // on cree une ligne panier pour afficher nos resultats
-if (localStorage.length == 1){
-    document.querySelector('.panierNav').innerHTML = "Plein";
+if (localStorage.length > 1){
     document.querySelector('.h2Main').innerHTML = "Votre selection !";
 
     const sectionBox = document.getElementById("tableauPanier"); // on recupere notre element section
@@ -71,11 +73,18 @@ if (localStorage.length == 1){
         const ligneArticle = document.createElement("div")
         ligneArticle.className = "ligneArticlePanier"
         sectionBox.appendChild(ligneArticle);
+        // ====== on cree une balise a pour pouvoir l'agrandir l'image au clique =======
+        const balAImagePanier = document.createElement('a');
+        balAImagePanier.className = ("aImage");
+        balAImagePanier.setAttribute("src", objJson[i].image);
+        ligneArticle.appendChild(balAImagePanier);
         // ====== on affiche l'image de l'article =======
         const imagePanier = document.createElement('img');
         imagePanier.className = ('imageDuPanier');
+        imagePanier.setAttribute("alt", objJson[i].name);
+        imagePanier.setAttribute("title", "super appareil photo" + " " + objJson[i].name);
         imagePanier.src += objJson[i].image;
-        ligneArticle.appendChild(imagePanier);
+        balAImagePanier.appendChild(imagePanier); // on iinsere la balise image dans la balise "a"
         // ====== on affiche le nom de notre article ====== 
         const divNamePanier = document.createElement('div');
         divNamePanier.className = "divNamePanier";
