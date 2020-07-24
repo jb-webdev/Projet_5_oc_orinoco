@@ -1,32 +1,39 @@
-// ===========================================================================
-// ================== nous sommes a la page panier ======
-// ===========================================================================
+
 
 // // ================== création de la ligne panier ==============
-let messageLignePanier;
+
 let lectureObjet = localStorage.getItem("panier"); // on cree une variable pour recuperer notre objet du localstorage
-// on affiche la quantite d'article dans le panier
-document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
-
-
 let objJson = JSON.parse(lectureObjet); // on parse l'objet pour pouvoir le traiter
-// console.log(objJson[0].name); // on controle que l'on recupere l'e nom de l'objet numero 1
-// on cree une ligne panier pour afficher nos resultats
+
+// ==========  je cree une variable pour le montant du panier ===========
+let somme = 0;
+function calculSomme(){
+    for (i = 0; i< objJson.length; i++){
+        somme += objJson[i].price * objJson[i].quantite; 
+    }
+}
+calculSomme();
+document.querySelector('.btnPanier').addEventListener("click", function() {
+    localStorage.clear ("panier");
+    localStorage.clear ("quantite");
+});
 if (localStorage.length > 1){
-    document.querySelector('.h2Main').innerHTML = "Votre selection !";
+
+    document.querySelector('.h2Main').innerHTML = "Votre selection !"; // on affiche le message de la page
 
     const sectionBox = document.getElementById("tableauPanier"); // on recupere notre element section
 
     const divBoxLigne = document.createElement("div"); // on cree une div pour inserer nos articles
     divBoxLigne.className = ('indexLignePanier');  // on donne un nom de classe à notre div
-    sectionBox.appendChild(divBoxLigne); // on insere notre div dans la section
-// ===== col image ======
-    const divTitrePanImage = document.createElement('div')
-    divTitrePanImage.className = "titrePanImage";
-    divBoxLigne.appendChild(divTitrePanImage);
+    sectionBox.appendChild(divBoxLigne); // on insere notre div dans la balise section
 
-    const h3BoxImage = document.createElement("h3");  // cree la balise h3 pour lke titre de la colonne
-    h3BoxImage.className = "image";
+// ===== col image ======
+    const divTitrePanImage = document.createElement('div') // on cree une dive pour le titre de la colonne
+    divTitrePanImage.className = "titrePanImage"; // on donne un nom de classe à notre balise
+    divBoxLigne.appendChild(divTitrePanImage); // on insere notre balise dans notre ligne de titre
+
+    const h3BoxImage = document.createElement("h3");  // cree la balise h3 pour le titre de la colonne
+    h3BoxImage.className = "image"; 
     h3BoxImage.innerHTML = "Produit";
     divTitrePanImage.appendChild(h3BoxImage);
 // ===== col name ======
@@ -68,9 +75,9 @@ if (localStorage.length > 1){
     h3BoxPrixTotal.className = "prixTotal";
     h3BoxPrixTotal.innerHTML = "Prix total";
     divColPanPrixTotal.appendChild(h3BoxPrixTotal);
-    for (i = 0; i < objJson.length; i++) {
+    for (i = 0; i < objJson.length; i++) {  // on cree une boucle pour afficher nos articles 
         // ====== on cree une ligne pour chaque article ======
-        const ligneArticle = document.createElement("div")
+        const ligneArticle = document.createElement("div") // pour chaque article on cree une ligne avec une div
         ligneArticle.className = "ligneArticlePanier"
         sectionBox.appendChild(ligneArticle);
         // ====== on cree une balise a pour pouvoir l'agrandir l'image au clique =======
@@ -84,7 +91,7 @@ if (localStorage.length > 1){
         imagePanier.setAttribute("alt", objJson[i].name);
         imagePanier.setAttribute("title", "super appareil photo" + " " + objJson[i].name);
         imagePanier.src += objJson[i].image;
-        balAImagePanier.appendChild(imagePanier); // on iinsere la balise image dans la balise "a"
+        balAImagePanier.appendChild(imagePanier); // on insere la balise image dans la balise "a"
         // ====== on affiche le nom de notre article ====== 
         const divNamePanier = document.createElement('div');
         divNamePanier.className = "divNamePanier";
@@ -108,9 +115,9 @@ if (localStorage.length > 1){
     // ============================================================================
 
     // ====== on créer un block pour la quantité produit ======
-        const inputBoxQuantite = document.createElement("div");   // mette dans la boucle
-        inputBoxQuantite.className = "inputForm";           // mettre dans la boucle
-        ligneArticle.appendChild(inputBoxQuantite);    // mettre dans la boucle
+        const inputBoxQuantite = document.createElement("div");   
+        inputBoxQuantite.className = "inputForm";           
+        ligneArticle.appendChild(inputBoxQuantite);    
 
         const creatForm = document.createElement("form");
         creatForm.className = "formPanier";
@@ -128,11 +135,7 @@ if (localStorage.length > 1){
 
         let inputBtnQuantite = document.createElement("p");
         inputBtnQuantite.className = "inputPanier";
-
-    // === on affiche une quantité minimum pour la commande
-        // on creer un variable pour pouvoir modifier notre quantité et la rapeller plus tard dans le code
         inputBtnQuantite.innerHTML = objJson[i].quantite;
-
         creatForm.appendChild(inputBtnQuantite);
 
     // ==== on créer un input pour le bouton "+" quantité produit
@@ -153,25 +156,7 @@ if (localStorage.length > 1){
         const textMontant = document.createElement("p");
         textMontant.className = "ligneMontantBaliseP";
         textMontant.innerHTML =  objJson[i].price * objJson[i].quantite + ' ' + '€';
-        montantLigne.appendChild(textMontant);
-
-        // =================== on utilise un ecouteur d'évenement pour modifier nos quantité et notre montant de ligne
-        // ===== on ecoute un evenement  'click' sur le boutton '-'
-        
-        document.querySelector(".btnNeg").addEventListener("click", function() {
-            if (inputBtnQuantite.innerHTML >= 1) {
-                inputBtnQuantite.innerHTML --;
-            //    textMontant.innerHTML = inputBtnQuantite.innerHTML * objJson[i].price + ' ' + '€';
-            //    textMontantTotal.innerHTML = inputBtnQuantite.innerHTML * objJson[i].price + ' ' + '€';
-        } 
-    });
-         // ===== on ecoute un evenement  'click' sur le boutton '+'
-        document.querySelector(".btnPos").addEventListener("click", function() {
-        inputBtnQuantite.innerHTML ++; 
-        //    textMontant.innerHTML = inputBtnQuantite.innerHTML * objJson[i].price + ' ' + '€';
-        //    textMontantTotal.innerHTML = inputBtnQuantite.innerHTML * objJson[i].price + ' ' + '€';
-    });
-
+        montantLigne.appendChild(textMontant);  
     }
     // cree une ligne suplementaire pour le montant du panier=====================
 
@@ -182,7 +167,7 @@ if (localStorage.length > 1){
         sectionBox.appendChild(sectionCalculPanier);
 
         const divBoxTotal = document.createElement("div"); 
-        divBoxTotal.className = ('total');  // on ndonne un nom de class a notre div
+        divBoxTotal.className = ('total');  // on ndonne un nom de class à notre div
         sectionCalculPanier.appendChild(divBoxTotal); // on insere notre div dans la section
 
         const paragrapheTextMontant = document.createElement('p');
@@ -196,29 +181,27 @@ if (localStorage.length > 1){
 
         const paragrapheFormMontantP = document.createElement('p');
         paragrapheFormMontantP.className = "formMontantP";
-        paragrapheFormMontantP.innerHTML = "problème à résoudre";
+        paragrapheFormMontantP.innerHTML = somme + ' ' + '€';
         divBoxResultatMontant.appendChild(paragrapheFormMontantP);
         
-        // =========== on affiche le resultat du montant a payer ==========
-        // let montantPanier = (objJson[i].price * 1); // j'ai réussi a en faire des number et non des string
-        // console.log(montantPanier);
-        // const textMontantTotal = document.querySelector(".formMontantP");
-        // textMontantTotal.innerHTML = montantPanier + ' ' + '€';
+        const boxBtn = document.createElement("div");
+        boxBtn.className = ".boxBtnPanier";
+        sectionBox.appendChild(boxBtn);
 
-        // on creer un bouton pour la validation et envoi du formulaire
-
+// ========= on creer un bouton pour la validation et envoi du formulaire ==========
         const btnValidationPanier = document.createElement('button');
-        btnValidationPanier.className = "btnValidPanier btn";      
+        btnValidationPanier.className = "btnValidPanier";      
         btnValidationPanier.setAttribute("type", "button");
         btnValidationPanier.setAttribute("value", "Validation panier");
         btnValidationPanier.innerHTML = "valider votre panier";
-        sectionBox.appendChild(btnValidationPanier);
+        boxBtn.appendChild(btnValidationPanier);
 
         document.querySelector(".btnValidPanier").addEventListener("click", function() {
             const formValidPanier = document.createElement('form'); // je cree un champ formulaire à fficher
             formValidPanier.className = "formValPan";  // je donne un nom de class a la balise form
             sectionBox.appendChild(formValidPanier);  // j'insere la balise form dans l'element principale
 
+// ========= on creer nos formulaire pour validation de la commande ==========
             const h3ValidPanier = document.createElement("h3"); 
             h3ValidPanier.className = "titreFormPanier";
             h3ValidPanier.innerHTML = "Formulaire de validation";
@@ -310,7 +293,7 @@ if (localStorage.length > 1){
             inputBoxFormEmail.className = "inputBoxFormEmail";
             inputBoxFormEmail.setAttribute("type", "email");
             inputBoxFormEmail.setAttribute("name", "email");
-            inputBoxFormEmail.setAttribute("required", "required");
+            inputBoxFormEmail.setAttribute("required", "required"); 
             inputBoxFormEmail.setAttribute("placeHolder", "utilisateur@domaine.fr");
             boxFormEmail.appendChild(inputBoxFormEmail);
 
@@ -322,14 +305,12 @@ if (localStorage.length > 1){
             formValidPanier.appendChild(btnValidFormulaire);
             
             btnValidationPanier.setAttribute("disabled", "disabled"); // on désactive le bouton
+            // document.addEventListener(".btnPanierSupprimer")
+            
         });
-}else{
+}else{ // si non on affiche un message de panier vide !
     document.querySelector('.h2Main').innerHTML = "Votre panier est vide";
-}
-
-
-
-
+} 
 
 //===========================================================================================
 //==================== ne pas toucher c'est une sauvegarde  qui fonctionne ==================
@@ -397,3 +378,12 @@ if (localStorage.length > 1){
 // }else{
 // document.querySelector('.h2Main').innerHTML = "Votre panier est vide";
 // }
+
+
+// === création bouton pour suprimer du panier ==========
+        // const btnPanierSup = document.createElement('button');
+        // btnPanierSup.className = "btnPanierSupprimer";      
+        // btnPanierSup.setAttribute("type", "button");
+        // btnPanierSup.setAttribute("value", "suprimer");
+        // btnPanierSup.innerHTML = "supprimer votre selection";
+        // boxBtn.appendChild(btnPanierSup); // on insert notre balise a dans la div

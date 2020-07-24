@@ -105,13 +105,44 @@ for (i = 0; i < response.lenses.length; i++) {
          btnPanier.innerHTML = "ajouter";
          divBoxPanier.appendChild(btnPanier); // on insert notre balise a dans la div
 
-// === création bouton pour suprimer du panier ==========
-         const btnPanierSup = document.createElement('button');
-         btnPanierSup.className = "btnPanierSupprimer btn";      
-         btnPanierSup.setAttribute("type", "button");
-         btnPanierSup.setAttribute("value", "suprimer");
-         btnPanierSup.innerHTML = "supprimer";
-         divBoxPanier.appendChild(btnPanierSup); // on insert notre balise a dans la div
+         const creatForm = document.createElement("form");
+         creatForm.className = "formPanier";
+         divBoxPanier.appendChild(creatForm);
+    //======= on créer un input pour le bouton "-" quantité produit
+
+         const inputBtnNeg = document.createElement("button");
+         inputBtnNeg.className = "btnNeg";
+         inputBtnNeg.setAttribute("type", "button");
+         inputBtnNeg.innerHTML = "-";
+
+         creatForm.appendChild(inputBtnNeg);
+
+    //======= on créer un input pour le text quantité produit
+
+         let inputBtnQuantite = document.createElement("p");
+         inputBtnQuantite.className = "inputPanier";
+         inputBtnQuantite.innerHTML = 1; // === on affiche une quantité minimum pour la commande
+         creatForm.appendChild(inputBtnQuantite);
+
+    // ==== on créer un input pour le bouton "+" quantité produit
+         const inputBtnPos = document.createElement("button");
+         inputBtnPos.className = "btnPos";
+         inputBtnPos.setAttribute("type", "button");
+         inputBtnPos.innerHTML = "+";
+         creatForm.appendChild(inputBtnPos);
+// =================== on utilise un ecouteur d'évenement pour modifier nos quantité et notre montant de ligne
+    // ===== on ecoute un evenement  'click' sur le boutton '-'
+        
+        document.querySelector(".btnNeg").addEventListener("click", function() {
+            if (inputBtnQuantite.innerHTML >= 2) {
+                inputBtnQuantite.innerHTML --;
+        } 
+    });
+         
+        document.querySelector(".btnPos").addEventListener("click", function() {
+            inputBtnQuantite.innerHTML ++; 
+    });
+
 
 // =========== on recupere les valeurs pour crée notre ligne panier ============
 
@@ -155,7 +186,7 @@ document.querySelector(".btnPanier").addEventListener('click', function() {
             windowImageArticle,
             windowNameArticle,
             windowPriceArticle,
-            1
+            inputBtnQuantite.innerHTML
         )
         panier.push(premierObj); // je pousse les info pour creer mon objet avec la classe Objs
         localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier"
@@ -186,7 +217,7 @@ document.querySelector(".btnPanier").addEventListener('click', function() {
                 windowImageArticle,
                 windowNameArticle,
                 windowPriceArticle,
-                1
+                inputBtnQuantite.innerHTML
             )
             panier.push(deuxiemeObj);
             localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier" 
@@ -199,10 +230,7 @@ document.querySelector(".btnPanier").addEventListener('click', function() {
 
     }
 })
-    document.querySelector(".btnPanierSupprimer").addEventListener('click', function() {
-        localStorage.clear('panier');
-        document.querySelector('.panierNav').innerHTML = "0";
-    })
+    
 
 });
 // =========================================================================== 

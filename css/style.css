@@ -61,10 +61,29 @@
   text-align: center;
 }
 
+.boxBtnPanier {
+  display: flex;
+  flex-direction: row;
+}
+
 .btnValidPanier {
   width: 100%;
-  margin-right: auto;
-  margin-left: auto;
+  background: none;
+  color: #cccccc;
+  color: #080808;
+  height: 50px;
+  border: 1px solid #47b947;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1em;
+  border-radius: 4px;
+  transition: 0.6s;
+}
+
+.btnValidPanier:hover {
+  background: #47b947;
+  cursor: pointer;
+  box-shadow: inset 2px 2px 3px rgba(165, 160, 160, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 }
 
 .formValPan {
