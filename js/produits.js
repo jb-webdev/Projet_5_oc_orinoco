@@ -124,22 +124,20 @@ let windowPriceArticle = response.price/100;
 let panier = []; // on cree une variable pour nos objets
 
 class Objs {        // je cree une class pour stocker mes informations article
-    constructor (image, nom, prix) {
+    constructor (image, nom, prix, quantite) {
         this.image = image;
         this.name = nom;
-        this.price = prix
+        this.price = prix;
+        this.quantite = quantite
     }
 } 
 //je declare les variables
-let quantiteArt;
 let lectureQuantite;
 let recupQuantiteLocal;
 let premierObj;
 let deuxiemeObj;
 
 let objsUn;
-let objWindow;
-let monPanier = panier;
 
 let lectureObjet;  // on cree une variable pour recuperer notre objet du localstorage
 let objJson;  // on parse l'objet pour pouvoir le traiter
@@ -156,42 +154,49 @@ document.querySelector(".btnPanier").addEventListener('click', function() {
         premierObj = new Objs (
             windowImageArticle,
             windowNameArticle,
-            windowPriceArticle
+            windowPriceArticle,
+            1
         )
         panier.push(premierObj); // je pousse les info pour creer mon objet avec la classe Objs
         localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier"
         lectureObjet = localStorage.getItem("panier"); // je recupere les informations avec la methode get pour controler la presernce de mon objet dans le localStorage
         objJson = JSON.parse(lectureObjet); // je parse les info pour pouvoir les trater
-
+        console.log(panier.length);
         // on affiche la quantite au panier
-        localStorage.setItem("quantite", 1);
+        localStorage.setItem("quantite", panier.length);
         lectureQuantite = localStorage.getItem("quantite");
+        // on affiche le nombre d'article dans le panier nav
         document.querySelector('.panierNav').innerHTML = lectureQuantite;
 
     }else if (monStockage.length > 0) {
-        lectureObjet = localStorage.getItem("panier"); // je recupere les informations avec la methode get pour controler la presernce de mon objet dans le localStorage
-        objJson = JSON.parse(lectureObjet); // je parse les infos pour pouvoir les trater
-        for(i = 0 ; i < objJson.length; i++) {
-            objsUn = new Objs (
-                objJson[i].image,
-                objJson[i].name,
-                objJson[i].price
+        lectureObjet = localStorage.getItem("panier"); // je recupere les informations avec la methode get pour controler la presence de mon objet dans le localStorage
+        objJson = JSON.parse(lectureObjet); // je parse les infos pour pouvoir les traiter
+        
+        
+            for(i = 0 ; i < objJson.length; i++) {
+                objsUn = new Objs (
+                    objJson[i].image,
+                    objJson[i].name,
+                    objJson[i].price,
+                    objJson[i].quantite
+                )
+                panier.push(objsUn);
+            }
+            deuxiemeObj = new Objs (
+                windowImageArticle,
+                windowNameArticle,
+                windowPriceArticle,
+                1
             )
-            panier.push(objsUn);
-        }
-        deuxiemeObj = new Objs (
-            windowImageArticle,
-            windowNameArticle,
-            windowPriceArticle
-        )
-        panier.push(deuxiemeObj);
-        localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier" 
-        recupQuantiteLocal = localStorage.getItem("quantite"),
+            panier.push(deuxiemeObj);
+            localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier" 
+            recupQuantiteLocal = localStorage.getItem("quantite"),
 
-        // console.log(recupQuantiteLocal);
-        recupQuantiteLocal ++;
-        localStorage.setItem("quantite", recupQuantiteLocal);
-        document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
+            // console.log(recupQuantiteLocal);
+            recupQuantiteLocal ++;
+            localStorage.setItem("quantite", recupQuantiteLocal);
+            document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
+
     }
 })
     document.querySelector(".btnPanierSupprimer").addEventListener('click', function() {
@@ -203,3 +208,79 @@ document.querySelector(".btnPanier").addEventListener('click', function() {
 // =========================================================================== 
 // =====================   on sort de la promise AJAX ========================
 // ===========================================================================
+
+
+// for(i = 0 ; i < objJson.length; i++) {
+//     objsUn = new Objs (
+//         objJson[i].image,
+//         objJson[i].name,
+//         objJson[i].price,
+//         objJson[i].quantite
+//     )
+//     panier.push(objsUn);
+// }
+// deuxiemeObj = new Objs (
+//     windowImageArticle,
+//     windowNameArticle,
+//     windowPriceArticle,
+//     1
+// )
+// panier.push(deuxiemeObj);
+// localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier" 
+// recupQuantiteLocal = localStorage.getItem("quantite"),
+
+// // console.log(recupQuantiteLocal);
+// recupQuantiteLocal ++;
+// localStorage.setItem("quantite", recupQuantiteLocal);
+// document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
+// }
+// })
+// document.querySelector(".btnPanierSupprimer").addEventListener('click', function() {
+// localStorage.clear('panier');
+// document.querySelector('.panierNav').innerHTML = "0";
+// })
+
+// });
+
+
+// =================================================================
+// =====essai boucle pour quantite article dans le panier===========
+// =================================================================
+
+// for(i = 0 ; i < objJson.length; i++){
+//     // console.log(objJson[i].name);
+//     // console.log(windowNameArticle);
+//     if (objJson[i].name == windowNameArticle){
+//         console.log("ok");
+//         // console.log(objJson[i].quantite+1);
+//         objsUn = new Objs (
+//             objJson[i].image,
+//             objJson[i].name,
+//             objJson[i].price,
+//             objJson[i].quantite+1
+//         )
+//         panier.push(objsUn);
+//         console.log(panier.length);
+//         localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier" 
+//         recupQuantiteLocal = panier.length,
+//         console.log(recupQuantiteLocal);
+//         localStorage.setItem("quantite", recupQuantiteLocal);
+//         document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
+//     }else if (objJson[i].name != windowNameArticle) {
+//         console.log("ils sont different");
+//         objsUn = new Objs (
+//             objJson[i].image,
+//             objJson[i].name,
+//             objJson[i].price,
+//             objJson[i].quantite
+//         )
+//         panier.push(objsUn);
+        
+//         localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier" 
+//         recupQuantiteLocal = panier.length,
+//         // console.log(recupQuantiteLocal);
+        
+//         localStorage.setItem("quantite", recupQuantiteLocal);
+//         document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
+//     }
+// }

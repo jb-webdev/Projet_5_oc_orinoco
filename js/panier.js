@@ -130,8 +130,8 @@ if (localStorage.length > 1){
         inputBtnQuantite.className = "inputPanier";
 
     // === on affiche une quantité minimum pour la commande
-        let calQuantite = 1; // on creer un variable pour pouvoir modifier notre quantité et la rapeller plus tard dans le code
-        inputBtnQuantite.innerHTML = calQuantite;
+        // on creer un variable pour pouvoir modifier notre quantité et la rapeller plus tard dans le code
+        inputBtnQuantite.innerHTML = objJson[i].quantite;
 
         creatForm.appendChild(inputBtnQuantite);
 
@@ -152,11 +152,12 @@ if (localStorage.length > 1){
         
         const textMontant = document.createElement("p");
         textMontant.className = "ligneMontantBaliseP";
-        textMontant.innerHTML =  objJson[i].price * inputBtnQuantite.innerHTML + ' ' + '€';
+        textMontant.innerHTML =  objJson[i].price * objJson[i].quantite + ' ' + '€';
         montantLigne.appendChild(textMontant);
 
         // =================== on utilise un ecouteur d'évenement pour modifier nos quantité et notre montant de ligne
         // ===== on ecoute un evenement  'click' sur le boutton '-'
+        
         document.querySelector(".btnNeg").addEventListener("click", function() {
             if (inputBtnQuantite.innerHTML >= 1) {
                 inputBtnQuantite.innerHTML --;
@@ -186,7 +187,7 @@ if (localStorage.length > 1){
 
         const paragrapheTextMontant = document.createElement('p');
         paragrapheTextMontant.className = "textMontant";
-        paragrapheTextMontant.innerHTML = "Montant de votre panier";
+        paragrapheTextMontant.innerHTML = "Montant de votre panier : ";
         divBoxTotal.appendChild(paragrapheTextMontant);
 
         const divBoxResultatMontant = document.createElement("div"); // on cree une div pour inserer nos articles
@@ -195,9 +196,9 @@ if (localStorage.length > 1){
 
         const paragrapheFormMontantP = document.createElement('p');
         paragrapheFormMontantP.className = "formMontantP";
-        paragrapheFormMontantP.innerHTML = "2000 euros";
+        paragrapheFormMontantP.innerHTML = "problème à résoudre";
         divBoxResultatMontant.appendChild(paragrapheFormMontantP);
-
+        
         // =========== on affiche le resultat du montant a payer ==========
         // let montantPanier = (objJson[i].price * 1); // j'ai réussi a en faire des number et non des string
         // console.log(montantPanier);
@@ -236,7 +237,8 @@ if (localStorage.length > 1){
             const inputBoxFormNom = document.createElement("input"); 
             inputBoxFormNom.className = "inputBoxFormNom";
             inputBoxFormNom.setAttribute ("type", "text");
-            inputBoxFormNom.setAttribute ("name", "Nom");
+            inputBoxFormNom.setAttribute ("name", "nom");
+            inputBoxFormNom.setAttribute ("required", "required");
             inputBoxFormNom.setAttribute("placeHolder", "Votre nom");
             boxFormNom.appendChild(inputBoxFormNom);
 
@@ -253,7 +255,8 @@ if (localStorage.length > 1){
             const inputBoxFormPrenom = document.createElement("input"); 
             inputBoxFormPrenom.className = "inputBoxFormPrenom";
             inputBoxFormPrenom.setAttribute ("type", "text");
-            inputBoxFormPrenom.setAttribute ("prenom", "Prenom");
+            inputBoxFormPrenom.setAttribute ("name", "Prenom");
+            inputBoxFormPrenom.setAttribute ("required", "required");
             inputBoxFormPrenom.setAttribute("placeHolder", "Votre prénom");
             boxFormPrenom.appendChild(inputBoxFormPrenom);
 
@@ -270,7 +273,8 @@ if (localStorage.length > 1){
             const inputBoxFormAdresse = document.createElement("input"); 
             inputBoxFormAdresse.className = "inputBoxFormAdresse";
             inputBoxFormAdresse.setAttribute ("type", "text");
-            inputBoxFormAdresse.setAttribute ("adresse", "Adresse");
+            inputBoxFormAdresse.setAttribute ("name", "Adresse");
+            inputBoxFormAdresse.setAttribute ("required", "required");
             inputBoxFormAdresse.setAttribute("placeHolder", "Votre adresse");
             boxFormAdresse.appendChild(inputBoxFormAdresse);
 
@@ -287,7 +291,8 @@ if (localStorage.length > 1){
             const inputBoxFormVille = document.createElement("input"); 
             inputBoxFormVille.className = "inputBoxFormVille";
             inputBoxFormVille.setAttribute ("type", "text");
-            inputBoxFormVille.setAttribute ("Ville", "Ville");
+            inputBoxFormVille.setAttribute ("name", "Ville");
+            inputBoxFormVille.setAttribute ("required", "required");
             inputBoxFormVille.setAttribute("placeHolder", "Votre ville");
             boxFormVille.appendChild(inputBoxFormVille);
 
@@ -300,11 +305,12 @@ if (localStorage.length > 1){
             labelBoxFormEmail.setAttribute ("for", "email");
             labelBoxFormEmail.innerHTML = "Courriel : ";
             boxFormEmail.appendChild(labelBoxFormEmail);
-            
+
             const inputBoxFormEmail = document.createElement("input"); 
             inputBoxFormEmail.className = "inputBoxFormEmail";
             inputBoxFormEmail.setAttribute("type", "email");
             inputBoxFormEmail.setAttribute("name", "email");
+            inputBoxFormEmail.setAttribute("required", "required");
             inputBoxFormEmail.setAttribute("placeHolder", "utilisateur@domaine.fr");
             boxFormEmail.appendChild(inputBoxFormEmail);
 
@@ -315,17 +321,14 @@ if (localStorage.length > 1){
 
             formValidPanier.appendChild(btnValidFormulaire);
             
-        
-            // const h3formValpan = document.createElement('div');
-            // h3formValpan.className = "h3essai";
-            // h3formValpan.innerHTML = "ca fonctionne bien c'est bon ça";
-            // divFormValidPanier.appendChild(h3formValpan);
             btnValidationPanier.setAttribute("disabled", "disabled"); // on désactive le bouton
         });
-       
 }else{
     document.querySelector('.h2Main').innerHTML = "Votre panier est vide";
 }
+
+
+
 
 
 //===========================================================================================
