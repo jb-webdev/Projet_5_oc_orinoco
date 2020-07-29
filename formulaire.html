@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/1774d8399c.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <title>ORINOCO</title>
+</head>
+<body>
+        <header id="heading">
+            <h1 id="h1Header">ORINOCO</h1>
+            <div id="nav-bar">
+                <a href="index.html" class="lienMenu btn">Shop</a>
+                <a href="panier.html" class="lienPanierNav btn"><p class="panierNav">0</p><span class="fas fa-cart-arrow-down"></span></a>
+            </div>
+
+        </header>
+        <main id="main">
+            
+            <div id="formulaire">
+                <h2 id="h2Titre">votre formulaire de commande</h2>
+                <form>
+                    <input type="text" name="nom" id="inputBoxFormNom" placeholder="votre nom" required><br>
+                    <input type="text" name="prenom" id="inputBoxFormPrenom" placeholder="votre prénom" required><br>
+                    <input type="text" name="adresse" id="inputBoxFormAdresse" placeholder="votre adresse" required><br>
+                    <input type="text" name="ville" id="inputBoxFormVille" placeholder="votre ville" required><br>
+                    <input type="email" name="email" id="inputBoxFormEmail" placeholder="votre courriel" required><br>
+                    <input type="email" name="email2" id="inputBoxFormEmailConfirm" placeholder="confimation courriel" required><br>
+                    <input type="button" value = "valider votre commande" class="btnInputEnvoyerFormulaire">
+                </form>
+                <p id="erreur"></p>
+            </div>
+        </main>
+        <footer id="footer">
+            <div class=" text-center">© 2020 Copyright:
+                <a href="https://github.com/jb-webdev/Projet_5_oc_orinoco"> https://github.com/jb-webdev</a>
+            </div>
+        </footer>
+        
+        <script src="./js/formulaire.js"></script>
+</body>
+</html>

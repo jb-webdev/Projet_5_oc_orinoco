@@ -17,6 +17,8 @@ document.querySelector('.btnPanier').addEventListener("click", function() {
     localStorage.clear ("panier");
     localStorage.clear ("quantite");
 });
+
+
 if (localStorage.length > 1){
 
     document.querySelector('.h2Main').innerHTML = "Votre selection !"; // on affiche le message de la page
@@ -118,33 +120,13 @@ if (localStorage.length > 1){
         const inputBoxQuantite = document.createElement("div");   
         inputBoxQuantite.className = "inputForm";           
         ligneArticle.appendChild(inputBoxQuantite);    
-
-        const creatForm = document.createElement("form");
-        creatForm.className = "formPanier";
-        inputBoxQuantite.appendChild(creatForm);
-    //======= on créer un input pour le bouton "-" quantité produit
-
-        const inputBtnNeg = document.createElement("button");
-        inputBtnNeg.className = "btnNeg";
-        inputBtnNeg.setAttribute("type", "button");
-        inputBtnNeg.innerHTML = "-";
-
-        creatForm.appendChild(inputBtnNeg);
-
+        
     //======= on créer un input pour le text quantité produit
 
         let inputBtnQuantite = document.createElement("p");
         inputBtnQuantite.className = "inputPanier";
         inputBtnQuantite.innerHTML = objJson[i].quantite;
-        creatForm.appendChild(inputBtnQuantite);
-
-    // ==== on créer un input pour le bouton "+" quantité produit
-        const inputBtnPos = document.createElement("button");
-        inputBtnPos.className = "btnPos";
-        inputBtnPos.setAttribute("type", "button");
-        inputBtnPos.innerHTML = "+";
-        creatForm.appendChild(inputBtnPos);
-    
+        inputBoxQuantite.appendChild(inputBtnQuantite);
 
     // === on creer une div pour le montant de la ligne =========
         const montantLigne = document.createElement("div");
@@ -189,201 +171,16 @@ if (localStorage.length > 1){
         sectionBox.appendChild(boxBtn);
 
 // ========= on creer un bouton pour la validation et envoi du formulaire ==========
-        const btnValidationPanier = document.createElement('button');
-        btnValidationPanier.className = "btnValidPanier";      
+        const btnValidationPanier = document.createElement('a');
+        btnValidationPanier.className = "btnValidPanier btn"; 
+        btnValidationPanier.setAttribute ("href", "formulaire.html"); 
         btnValidationPanier.setAttribute("type", "button");
         btnValidationPanier.setAttribute("value", "Validation panier");
         btnValidationPanier.innerHTML = "valider votre panier";
         boxBtn.appendChild(btnValidationPanier);
-
-        document.querySelector(".btnValidPanier").addEventListener("click", function() {
-            const formValidPanier = document.createElement('form'); // je cree un champ formulaire à fficher
-            formValidPanier.className = "formValPan";  // je donne un nom de class a la balise form
-            sectionBox.appendChild(formValidPanier);  // j'insere la balise form dans l'element principale
-
-// ========= on creer nos formulaire pour validation de la commande ==========
-            const h3ValidPanier = document.createElement("h3"); 
-            h3ValidPanier.className = "titreFormPanier";
-            h3ValidPanier.innerHTML = "Formulaire de validation";
-            formValidPanier.appendChild(h3ValidPanier);
-
-            const boxFormNom = document.createElement("div"); 
-            boxFormNom.className = "boxFormNom";
-            formValidPanier.appendChild(boxFormNom);
-
-            const labelBoxFormNom = document.createElement("label"); 
-            labelBoxFormNom.className = "labelBoxFormNom";
-            labelBoxFormNom.setAttribute ("for", "nom");
-            labelBoxFormNom.innerHTML = "Nom : ";
-            boxFormNom.appendChild(labelBoxFormNom);
-            
-            const inputBoxFormNom = document.createElement("input"); 
-            inputBoxFormNom.className = "inputBoxFormNom";
-            inputBoxFormNom.setAttribute ("type", "text");
-            inputBoxFormNom.setAttribute ("name", "nom");
-            inputBoxFormNom.setAttribute ("required", "required");
-            inputBoxFormNom.setAttribute("placeHolder", "Votre nom");
-            boxFormNom.appendChild(inputBoxFormNom);
-
-            const boxFormPrenom = document.createElement("div"); 
-            boxFormPrenom.className = "boxFormPrenom";
-            formValidPanier.appendChild(boxFormPrenom);
-
-            const labelBoxFormPrenom = document.createElement("label"); 
-            labelBoxFormPrenom.className = "labelBoxFormPrenom";
-            labelBoxFormPrenom.setAttribute ("prenom", "prenom");
-            labelBoxFormPrenom.innerHTML = "Prénom : ";
-            boxFormPrenom.appendChild(labelBoxFormPrenom);
-            
-            const inputBoxFormPrenom = document.createElement("input"); 
-            inputBoxFormPrenom.className = "inputBoxFormPrenom";
-            inputBoxFormPrenom.setAttribute ("type", "text");
-            inputBoxFormPrenom.setAttribute ("name", "Prenom");
-            inputBoxFormPrenom.setAttribute ("required", "required");
-            inputBoxFormPrenom.setAttribute("placeHolder", "Votre prénom");
-            boxFormPrenom.appendChild(inputBoxFormPrenom);
-
-            const boxFormAdresse = document.createElement("div"); 
-            boxFormAdresse.className = "boxFormAdresse";
-            formValidPanier.appendChild(boxFormAdresse);
-
-            const labelBoxFormAdresse = document.createElement("label"); 
-            labelBoxFormAdresse.className = "labelBoxFormAdresse";
-            labelBoxFormAdresse.setAttribute ("adresse", "adresse");
-            labelBoxFormAdresse.innerHTML = "Adresse : ";
-            boxFormAdresse.appendChild(labelBoxFormAdresse);
-            
-            const inputBoxFormAdresse = document.createElement("input"); 
-            inputBoxFormAdresse.className = "inputBoxFormAdresse";
-            inputBoxFormAdresse.setAttribute ("type", "text");
-            inputBoxFormAdresse.setAttribute ("name", "Adresse");
-            inputBoxFormAdresse.setAttribute ("required", "required");
-            inputBoxFormAdresse.setAttribute("placeHolder", "Votre adresse");
-            boxFormAdresse.appendChild(inputBoxFormAdresse);
-
-            const boxFormVille = document.createElement("div"); 
-            boxFormVille.className = "boxFormVille";
-            formValidPanier.appendChild(boxFormVille);
-
-            const labelBoxFormVille = document.createElement("label"); 
-            labelBoxFormVille.className = "labelBoxFormAdresse";
-            labelBoxFormVille.setAttribute ("Ville", "Ville");
-            labelBoxFormVille.innerHTML = "Ville : ";
-            boxFormVille.appendChild(labelBoxFormVille);
-            
-            const inputBoxFormVille = document.createElement("input"); 
-            inputBoxFormVille.className = "inputBoxFormVille";
-            inputBoxFormVille.setAttribute ("type", "text");
-            inputBoxFormVille.setAttribute ("name", "Ville");
-            inputBoxFormVille.setAttribute ("required", "required");
-            inputBoxFormVille.setAttribute("placeHolder", "Votre ville");
-            boxFormVille.appendChild(inputBoxFormVille);
-
-            const boxFormEmail = document.createElement("div"); 
-            boxFormEmail.className = "boxFormEmail";
-            formValidPanier.appendChild(boxFormEmail);
-
-            const labelBoxFormEmail = document.createElement("label"); 
-            labelBoxFormEmail.className = "labelBoxFormEmail";
-            labelBoxFormEmail.setAttribute ("for", "email");
-            labelBoxFormEmail.innerHTML = "Courriel : ";
-            boxFormEmail.appendChild(labelBoxFormEmail);
-
-            const inputBoxFormEmail = document.createElement("input"); 
-            inputBoxFormEmail.className = "inputBoxFormEmail";
-            inputBoxFormEmail.setAttribute("type", "email");
-            inputBoxFormEmail.setAttribute("name", "email");
-            inputBoxFormEmail.setAttribute("required", "required"); 
-            inputBoxFormEmail.setAttribute("placeHolder", "utilisateur@domaine.fr");
-            boxFormEmail.appendChild(inputBoxFormEmail);
-
-            const btnValidFormulaire = document.createElement("input");
-            btnValidFormulaire.className = "inputBtnValidForm";
-            btnValidFormulaire.setAttribute("type", "submit");
-            btnValidFormulaire.setAttribute("value", "Envoyer");
-
-            formValidPanier.appendChild(btnValidFormulaire);
-            
-            btnValidationPanier.setAttribute("disabled", "disabled"); // on désactive le bouton
-            // document.addEventListener(".btnPanierSupprimer")
-            
-        });
 }else{ // si non on affiche un message de panier vide !
     document.querySelector('.h2Main').innerHTML = "Votre panier est vide";
 } 
 
-//===========================================================================================
-//==================== ne pas toucher c'est une sauvegarde  qui fonctionne ==================
-//===========================================================================================
-    
-// let inputBtnQuantite = document.createElement("p");
-// inputBtnQuantite.className = "inputPanier";
 
-// // === on affiche une quantité minimum pour la commande
-// let calQuantite = 1; // on creer un variable pour pouvoir modifier notre quantité et la rapeller plus tard dans le code
-// inputBtnQuantite.innerHTML = calQuantite;
-
-// creatForm.appendChild(inputBtnQuantite);
-
-// // ==== on créer un input pour le bouton "+" quantité produit
-// const inputBtnPos = document.createElement("button");
-// inputBtnPos.className = "btnPos";
-// inputBtnPos.setAttribute("type", "button");
-// inputBtnPos.innerHTML = "+";
-// creatForm.appendChild(inputBtnPos);
-// // =================== on utilise un ecouteur d'évenement pour modifier nos quantité et notre montant de ligne
-// // ===== on ecoute un evenement  'click' sur le boutton '-'
-// document.querySelector(".btnNeg").addEventListener("click", function() {
-//      if (inputBtnQuantite.innerHTML >= 1) {
-//          inputBtnQuantite.innerHTML --;
-//         textMontant.innerHTML = inputBtnQuantite.innerHTML * objJson[i].price + ' ' + '€';
-//         textMontantTotal.innerHTML = inputBtnQuantite.innerHTML * objJson[i].price + ' ' + '€';
-//     } 
-// });
-// // ===== on ecoute un evenement  'click' sur le boutton '+'
-// document.querySelector(".btnPos").addEventListener("click", function() {
-//     inputBtnQuantite.innerHTML ++; 
-//     textMontant.innerHTML = inputBtnQuantite.innerHTML * objJson[i].price + ' ' + '€';
-//     textMontantTotal.innerHTML = inputBtnQuantite.innerHTML * objJson[i].price + ' ' + '€';
-// });
-
-// // ====================== fin pour les boutons de quantité article ===================
-
-// // === on creer une div pour le montant de la ligne =========
-
-// const colPanierPrixTotal = document.querySelector(".colPanierPrixTotal");
-
-// const montantLigne = document.createElement("div");
-// montantLigne.className = "montantLigne";
-// colPanierPrixTotal.appendChild(montantLigne);
-
-// // ======== on creer une balise "p" pour afficher le montant total de la ligne
-
-// const textMontant = document.createElement("p");
-// textMontant.className = "ligneMontantBaliseP";
-// textMontant.innerHTML =  objJson[i].price * inputBtnQuantite.innerHTML + ' ' + '€';
-// montantLigne.appendChild(textMontant);
-
-// // // =========== on affiche le resultat du montant a payer ==========
-// let montantPanier = (objJson[i].price * 1); // j'ai réussi a en faire des number et non des string
-// const textMontantTotal = document.querySelector(".formMontantP");
-// textMontantTotal.innerHTML = montantPanier + ' ' + '€';
-// }
-// const btnValidationPanier = document.createElement('button');
-//      btnValidationPanier.className = "btnValidPanier btn";      
-//      btnValidationPanier.setAttribute("type", "button");
-//      btnValidationPanier.setAttribute("value", "Valider votre pan");
-//      btnValidationPanier.innerHTML = "valider votre panier";
-//      sectionBox.appendChild(btnValidationPanier); // on insert notre balise a dans la div
-// }else{
-// document.querySelector('.h2Main').innerHTML = "Votre panier est vide";
-// }
-
-
-// === création bouton pour suprimer du panier ==========
-        // const btnPanierSup = document.createElement('button');
-        // btnPanierSup.className = "btnPanierSupprimer";      
-        // btnPanierSup.setAttribute("type", "button");
-        // btnPanierSup.setAttribute("value", "suprimer");
-        // btnPanierSup.innerHTML = "supprimer votre selection";
-        // boxBtn.appendChild(btnPanierSup); // on insert notre balise a dans la div
+////////////////////////////////////////// END ///////////////////////////////////////////////

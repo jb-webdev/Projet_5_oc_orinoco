@@ -58,6 +58,7 @@
 }
 .formPanier{
     @include alignDivPanier;
+    flex-direction: row;
 }
 .montantLigne{
     @include alignDivPanier;
@@ -65,20 +66,21 @@
     align-items: center;
     justify-content: center;
 }
-
 .inputPanier{
     width: 100px;
     text-align: center;
     border-radius: 4px;
     border: solid 1px $colorBtn;
-}
-form {
+  }
+.inputForm {
+    @include alignDivPanier;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     height: 133px;
-}
+  }
+
 .calcPanier {
     display: flex;
     flex-direction: row;
@@ -96,6 +98,7 @@ form {
     width: 200px;
     text-align: center;
 }
+
 
 
 // @media all and (max-width: 1266px){

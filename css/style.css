@@ -86,7 +86,7 @@
   box-shadow: inset 2px 2px 3px rgba(165, 160, 160, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 }
 
-.formValPan {
+#formValPan {
   display: flex;
   flex-direction: column;
   height: auto;
@@ -95,67 +95,49 @@
   margin-right: auto;
 }
 
-.boxFormNom {
-  width: 100%;
-  margin-bottom: 15px;
-  text-align: start;
-}
-
-.inputBoxFormNom {
+#inputBoxFormNom {
   width: 250px;
   border: 1px solid #47b947;
   border-radius: 4px;
+  margin-bottom: 10px;
 }
 
-.boxFormPrenom {
-  width: 100%;
-  margin-bottom: 15px;
-  text-align: start;
-}
-
-.inputBoxFormPrenom {
+#inputBoxFormPrenom {
   width: 250px;
   border: 1px solid #47b947;
   border-radius: 4px;
+  margin-bottom: 10px;
 }
 
-.boxFormAdresse {
-  width: 100%;
-  margin-bottom: 15px;
-  text-align: start;
-}
-
-.inputBoxFormAdresse {
+#inputBoxFormAdresse {
   width: 250px;
   border: 1px solid #47b947;
   border-radius: 4px;
+  margin-bottom: 10px;
 }
 
-.boxFormVille {
-  width: 100%;
-  margin-bottom: 15px;
-  text-align: start;
-}
-
-.inputBoxFormVille {
+#inputBoxFormVille {
   width: 250px;
   border: 1px solid #47b947;
   border-radius: 4px;
+  margin-bottom: 10px;
 }
 
-.boxFormEmail {
-  width: 100%;
-  margin-bottom: 15px;
-  text-align: start;
-}
-
-.inputBoxFormEmail {
+#inputBoxFormEmail {
   width: 250px;
   border: 1px solid #47b947;
   border-radius: 4px;
+  margin-bottom: 10px;
 }
 
-.inputBtnValidForm {
+#inputBoxFormEmailConfirm {
+  width: 250px;
+  border: 1px solid #47b947;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+#inputBtnValidForm {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -172,10 +154,14 @@
   margin-left: auto;
 }
 
-.inputBtnValidForm:hover {
+#inputBtnValidForm:hover {
   background: #47b947;
   cursor: pointer;
   box-shadow: inset 2px 2px 3px rgba(165, 160, 160, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
+}
+
+#pErreur {
+  color: #f50707;
 }
 
 body {
@@ -305,6 +291,21 @@ body {
 
 .boxSelectionImg {
   width: 300px;
+}
+
+.inputPanier {
+  width: 100px;
+  text-align: center;
+  border-radius: 4px;
+  border: solid 1px #47b947;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 133px;
 }
 
 .box {
@@ -437,6 +438,7 @@ body {
 .formPanier {
   width: 200px;
   text-align: center;
+  flex-direction: row;
 }
 
 .montantLigne {
@@ -454,7 +456,9 @@ body {
   border: solid 1px #47b947;
 }
 
-form {
+.inputForm {
+  width: 200px;
+  text-align: center;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -480,6 +484,44 @@ form {
 .resultMontant {
   width: 200px;
   text-align: center;
+}
+
+#formulaire {
+  margin-top: 200px;
+}
+
+h2 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+.btnInputEnvoyerFormulaire {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  color: #cccccc;
+  width: 130px;
+  height: 50px;
+  border: 1px solid #47b947;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1em;
+  border-radius: 4px;
+  transition: 0.6s;
+  color: #080808;
+  width: auto;
+}
+
+.btnInputEnvoyerFormulaire:hover {
+  background: #47b947;
+  cursor: pointer;
+  box-shadow: inset 2px 2px 3px rgba(165, 160, 160, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 }
 
 footer {

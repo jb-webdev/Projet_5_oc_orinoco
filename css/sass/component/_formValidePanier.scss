@@ -1,4 +1,4 @@
-.formValPan {
+#formValPan {
     display: flex;
     flex-direction: column;
     height: auto;
@@ -10,43 +10,27 @@
     width: 250px;
     border: 1px solid $colorBtn;
     border-radius: 4px;
+    margin-bottom: 10px;
 }
-@mixin boxFormValidPan{
-    width: 100%;
-    margin-bottom: 15px;
-    text-align: start;
-}
-.boxFormNom{
-    @include boxFormValidPan;
-}
-.inputBoxFormNom{
+#inputBoxFormNom{
     @include sizeLabelValidPanier;
 }
-.boxFormPrenom{
-    @include boxFormValidPan;
-}
-.inputBoxFormPrenom{
+#inputBoxFormPrenom{
     @include sizeLabelValidPanier;
 }
-.boxFormAdresse{
-    @include boxFormValidPan;
-}
-.inputBoxFormAdresse{
+#inputBoxFormAdresse{
     @include sizeLabelValidPanier;
 }
-.boxFormVille{
-    @include boxFormValidPan;
-}
-.inputBoxFormVille{
+#inputBoxFormVille{
     @include sizeLabelValidPanier;
 }
-.boxFormEmail{
-    @include boxFormValidPan;
-}
-.inputBoxFormEmail{
+#inputBoxFormEmail{
     @include sizeLabelValidPanier;
 }
-.inputBtnValidForm{
+#inputBoxFormEmailConfirm{
+    @include sizeLabelValidPanier;
+}
+#inputBtnValidForm{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,6 +47,9 @@
     margin-right: auto;
     margin-left: auto;
 }
-.inputBtnValidForm:hover{
+#inputBtnValidForm:hover{
     @include buttonHover;
+}
+#pErreur{
+    color: #f50707;
 }

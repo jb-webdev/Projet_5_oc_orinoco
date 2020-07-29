@@ -1,0 +1,20 @@
+#formulaire {
+    margin-top: 200px;
+}
+h2 {
+    text-align: center;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.btnInputEnvoyerFormulaire {
+    @include button;
+    color: $secondary;
+    width: auto;
+}
+.btnInputEnvoyerFormulaire:hover {
+    @include buttonHover;
+}

@@ -12,6 +12,19 @@
 .boxSelectionImg {
   width: 300px;
 }
+.inputPanier{
+  width: 100px;
+  text-align: center;
+  border-radius: 4px;
+  border: solid 1px $colorBtn;
+}
+form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 133px;
+}
 .box {
   @include alignItems;
   font-size: $fontSize2;

@@ -24,7 +24,7 @@ const get = function promiseApi () {              // declare un constante et on 
 
 //==================================== on recupere les réponse notre notre requete et on affiche les réponses ======================================
 get(urlApi).then(function(response) {
-   // console.log(response); // je verifie a suprimer en fin de TP 
+   // console.log(response); // je verifie 
       for (i = 0; i < response.length; i++) {
             const container = document.getElementById("catalogue");           
             const newBox = document.createElement("div");

@@ -6,7 +6,7 @@
 let paramsString = new URLSearchParams(window.location.search);
 
 const id = paramsString.get("id");
-// console.log(id);
+console.log(id);
 
 //===================== je cree une requete api pour recuperer les données du produit ==========================
 let urlApiProd = "http://localhost:3000/api/cameras"+"/"+ id;  // déclaration de la variable pour l'url choisi
@@ -155,7 +155,8 @@ let windowPriceArticle = response.price/100;
 let panier = []; // on cree une variable pour nos objets
 
 class Objs {        // je cree une class pour stocker mes informations article
-    constructor (image, nom, prix, quantite) {
+    constructor (id, image, nom, prix, quantite) {
+        this.id = id;
         this.image = image;
         this.name = nom;
         this.price = prix;
@@ -174,7 +175,7 @@ let lectureObjet;  // on cree une variable pour recuperer notre objet du localst
 let objJson;  // on parse l'objet pour pouvoir le traiter
 
 // affichage quantite panier panier
-
+console.log(id);
 document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
 
 // j'utilise un ecouteur d'evenements pour ajouter mes informations choisi par l'utilisateur
@@ -183,6 +184,7 @@ document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite"
 document.querySelector(".btnPanier").addEventListener('click', function() {
     if (monStockage.length == 0) {
         premierObj = new Objs (
+            id,
             windowImageArticle,
             windowNameArticle,
             windowPriceArticle,
@@ -206,6 +208,7 @@ document.querySelector(".btnPanier").addEventListener('click', function() {
         
             for(i = 0 ; i < objJson.length; i++) {
                 objsUn = new Objs (
+                    objJson[i].id,
                     objJson[i].image,
                     objJson[i].name,
                     objJson[i].price,
@@ -214,6 +217,7 @@ document.querySelector(".btnPanier").addEventListener('click', function() {
                 panier.push(objsUn);
             }
             deuxiemeObj = new Objs (
+                id,
                 windowImageArticle,
                 windowNameArticle,
                 windowPriceArticle,
@@ -233,82 +237,3 @@ document.querySelector(".btnPanier").addEventListener('click', function() {
     
 
 });
-// =========================================================================== 
-// =====================   on sort de la promise AJAX ========================
-// ===========================================================================
-
-
-// for(i = 0 ; i < objJson.length; i++) {
-//     objsUn = new Objs (
-//         objJson[i].image,
-//         objJson[i].name,
-//         objJson[i].price,
-//         objJson[i].quantite
-//     )
-//     panier.push(objsUn);
-// }
-// deuxiemeObj = new Objs (
-//     windowImageArticle,
-//     windowNameArticle,
-//     windowPriceArticle,
-//     1
-// )
-// panier.push(deuxiemeObj);
-// localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier" 
-// recupQuantiteLocal = localStorage.getItem("quantite"),
-
-// // console.log(recupQuantiteLocal);
-// recupQuantiteLocal ++;
-// localStorage.setItem("quantite", recupQuantiteLocal);
-// document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
-// }
-// })
-// document.querySelector(".btnPanierSupprimer").addEventListener('click', function() {
-// localStorage.clear('panier');
-// document.querySelector('.panierNav').innerHTML = "0";
-// })
-
-// });
-
-
-// =================================================================
-// =====essai boucle pour quantite article dans le panier===========
-// =================================================================
-
-// for(i = 0 ; i < objJson.length; i++){
-//     // console.log(objJson[i].name);
-//     // console.log(windowNameArticle);
-//     if (objJson[i].name == windowNameArticle){
-//         console.log("ok");
-//         // console.log(objJson[i].quantite+1);
-//         objsUn = new Objs (
-//             objJson[i].image,
-//             objJson[i].name,
-//             objJson[i].price,
-//             objJson[i].quantite+1
-//         )
-//         panier.push(objsUn);
-//         console.log(panier.length);
-//         localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier" 
-//         recupQuantiteLocal = panier.length,
-//         console.log(recupQuantiteLocal);
-//         localStorage.setItem("quantite", recupQuantiteLocal);
-//         document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
-//     }else if (objJson[i].name != windowNameArticle) {
-//         console.log("ils sont different");
-//         objsUn = new Objs (
-//             objJson[i].image,
-//             objJson[i].name,
-//             objJson[i].price,
-//             objJson[i].quantite
-//         )
-//         panier.push(objsUn);
-        
-//         localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier" 
-//         recupQuantiteLocal = panier.length,
-//         // console.log(recupQuantiteLocal);
-        
-//         localStorage.setItem("quantite", recupQuantiteLocal);
-//         document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
-//     }
-// }
