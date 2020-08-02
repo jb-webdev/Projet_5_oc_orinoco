@@ -524,6 +524,10 @@ form {
   box-shadow: inset 2px 2px 3px rgba(165, 160, 160, 0.6), inset -2px -2px 3px rgba(0, 0, 0, 0.6);
 }
 
+#messageLigneUne, #messageLigneDeux, #messageLigneTrois {
+  text-align: center;
+}
+
 footer {
   background-color: #535353;
   display: flex;

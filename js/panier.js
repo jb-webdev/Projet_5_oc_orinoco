@@ -165,6 +165,7 @@ if (localStorage.length > 1){
         paragrapheFormMontantP.className = "formMontantP";
         paragrapheFormMontantP.innerHTML = somme + ' ' + '€';
         divBoxResultatMontant.appendChild(paragrapheFormMontantP);
+        montantStockage = paragrapheFormMontantP.innerHTML;
         
         const boxBtn = document.createElement("div");
         boxBtn.className = ".boxBtnPanier";
@@ -178,6 +179,11 @@ if (localStorage.length > 1){
         btnValidationPanier.setAttribute("value", "Validation panier");
         btnValidationPanier.innerHTML = "valider votre panier";
         boxBtn.appendChild(btnValidationPanier);
+
+        // je stocke la valeur du panier avec un ecouteur d'evenement dans mon session storage
+        document.querySelector(".btnValidPanier").addEventListener("click", function(){
+            sessionStorage.setItem("montantCommande", montantStockage)
+        });
 }else{ // si non on affiche un message de panier vide !
     document.querySelector('.h2Main').innerHTML = "Votre panier est vide";
 } 

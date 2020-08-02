@@ -174,8 +174,8 @@ let objsUn;
 let lectureObjet;  // on cree une variable pour recuperer notre objet du localstorage
 let objJson;  // on parse l'objet pour pouvoir le traiter
 
-// affichage quantite panier panier
-console.log(id);
+// affichage quantite panier
+// console.log(id);
 document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
 
 // j'utilise un ecouteur d'evenements pour ajouter mes informations choisi par l'utilisateur

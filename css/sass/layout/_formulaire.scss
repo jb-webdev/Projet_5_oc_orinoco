@@ -18,3 +18,7 @@ form {
 .btnInputEnvoyerFormulaire:hover {
     @include buttonHover;
 }
+
+#messageLigneUne, #messageLigneDeux, #messageLigneTrois {
+    text-align: center;
+};

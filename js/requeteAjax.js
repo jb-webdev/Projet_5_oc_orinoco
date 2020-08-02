@@ -22,6 +22,8 @@ const get = function promiseApi () {              // declare un constante et on 
     })
 };
 
+// requeteAjaxPromise();
+
 //==================================== on recupere les réponse notre notre requete et on affiche les réponses ======================================
 get(urlApi).then(function(response) {
    // console.log(response); // je verifie 
@@ -60,5 +62,6 @@ get(urlApi).then(function(response) {
 
 });     //a ce stade les balises 'div' sont insérées avec les réponses de notre requete.
 document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
+
 
 
