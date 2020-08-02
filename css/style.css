@@ -528,6 +528,10 @@ form {
   text-align: center;
 }
 
+#erreur {
+  color: #fa0303;
+}
+
 footer {
   background-color: #535353;
   display: flex;
