@@ -165,6 +165,7 @@
 }
 
 body {
+  margin: 0;
   background-color: #ffffff;
   color: #080808;
 }
@@ -232,6 +233,13 @@ body {
 
 .boxImage {
   width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.newImage {
+  width: 90%;
 }
 
 .boxName {
@@ -241,6 +249,7 @@ body {
   align-items: center;
   width: 200px;
   font-size: 1.4em;
+  text-align: center;
 }
 
 .boxPrice {
@@ -270,11 +279,34 @@ body {
     justify-content: space-around;
   }
 }
+@media all and (max-width: 920px) {
+  #catalogue {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+  }
+}
+@media all and (max-width: 805px) {
+  #catalogue {
+    font-size: 1em;
+  }
+}
 @media all and (max-width: 680px) {
   .boxProducs {
     height: auto;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 10%;
+  }
+
+  .boxPrice {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .boxName {
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }
 .boxSelection {
@@ -414,9 +446,12 @@ form {
   margin-top: 5px;
 }
 
-.imageDuPanier {
+.boxImagePanier {
   width: 200px;
-  border-radius: 15px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .divNamePanier {
@@ -469,23 +504,102 @@ form {
 .calcPanier {
   display: flex;
   flex-direction: row;
+  height: 50px;
   margin-top: 5px;
+  margin-bottom: 2%;
 }
 
 .total {
   flex: 4;
   text-align: end;
   background-color: #47b947;
-  padding-right: 30px;
-  margin-bottom: 50px;
-  border-radius: 4px;
+}
+
+.textMontant {
+  background-color: #47b947;
 }
 
 .resultMontant {
   width: 200px;
+  height: auto;
   text-align: center;
 }
 
+.formMontantP {
+  width: auto;
+}
+
+.btnValidPanier {
+  font-size: 2em;
+}
+
+@media all and (max-width: 1010px) {
+  #tableauPanier {
+    width: 90%;
+  }
+
+  .btnValidPanier {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.6em;
+  }
+}
+@media all and (max-width: 972px) {
+  .imageDuPanier {
+    width: 90%;
+  }
+
+  .calcPanier {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 5px;
+  }
+
+  .resultMontant {
+    width: 200px;
+  }
+
+  .textMontant {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .formMontantP {
+    border-radius: 4px;
+    border: 2px solid #47b947;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .total {
+    max-width: 200px;
+    text-align: center;
+    background-color: #47b947;
+    padding-right: 30px;
+    margin-bottom: 50px;
+    border-radius: 4px;
+  }
+
+  .aImage {
+    max-width: 180px;
+  }
+}
+@media all and (max-width: 600px) {
+  #tableauPanier {
+    font-size: 0.8em;
+  }
+
+  .inputPanier {
+    width: 50px;
+  }
+}
+@media all and (max-width: 600px) {
+  #tableauPanier {
+    font-size: 0.6em;
+  }
+}
 #formulaire {
   margin-top: 200px;
 }

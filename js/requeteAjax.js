@@ -9,9 +9,8 @@ const get = function promiseApi () {              // declare un constante et on 
         xhr.onreadystatechange = function() {
             if (this.readyState == XMLHttpRequest.DONE) { // on lui passe les conditions avec if
                 if(this.status == 200){ 
-                //resolve(xhr.responseText)     // on verifie la réponse
                     resolve(JSON.parse(this.responseText)); // si c'est bon on retourne le fichier JSON parsé
-                //console.log(this.responseText);         // // on verifie la réponse du fichier JSON
+                // console.log(this.responseText);         // // on verifie la réponse du fichier JSON
                 } else {
                     reject(xhr); // si il y a une erreur on rejette
                 }
@@ -26,19 +25,23 @@ const get = function promiseApi () {              // declare un constante et on 
 
 //==================================== on recupere les réponse notre notre requete et on affiche les réponses ======================================
 get(urlApi).then(function(response) {
-   // console.log(response); // je verifie 
+   console.log(response); // on controle la présence des objet a utilise avant la boucle
       for (i = 0; i < response.length; i++) {
             const container = document.getElementById("catalogue");           
             const newBox = document.createElement("div");
             newBox.className = "boxProducs";  
             container.appendChild(newBox);
     // insertion des images
-            const newBoxImg = document.createElement('img');
+            const newBoxImg = document.createElement('div');
             newBoxImg.className = "boxImage";
-            newBoxImg.setAttribute("alt", response[i].name);
-            newBoxImg.setAttribute("title", "super appareil photo" + " " + response[i].name);
             newBox.appendChild(newBoxImg);
-            newBoxImg.src = response[i].imageUrl;
+    
+            const newBoxImgage = document.createElement('img');
+            newBoxImgage.className = "newImage";
+            newBoxImgage.setAttribute("alt", response[i].name);
+            newBoxImgage.setAttribute("title", "super appareil photo" + " " + response[i].name);
+            newBoxImgage.src = response[i].imageUrl;
+            newBoxImg.appendChild(newBoxImgage);
     // insertion information nom de l'article
             const newBoxName = document.createElement("p"); // on crée un element HTML
             newBoxName.className = "boxName";  // on crée une classe a la div     

@@ -23,10 +23,18 @@
 
 .boxImage {
   width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.newImage{
+  
+  width: 90%;
 }
 .boxName {
   @include alignItems;
   font-size: $fontSize2;
+  text-align: center;
 }
 .boxPrice {
   @include alignItems;
@@ -40,8 +48,6 @@
 @media all and (max-width: 1200px){
   .catalogue {
     width: 100%;
-    // margin-left: 0;
-    // margin-right: 0;
   }
   .boxProducs {
     width: 100%;
@@ -50,10 +56,31 @@
     justify-content: space-around;
   }
 }
+@media all and (max-width: 920px){
+  #catalogue {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+  }
+}
+@media all and (max-width: 805px){
+  #catalogue {
+    font-size: 1em;
+  }
+}
 @media all and (max-width: 680px){
   .boxProducs {
     height:  auto;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 10%;
+  }
+  .boxPrice{
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .boxName{
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }

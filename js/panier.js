@@ -83,17 +83,16 @@ if (localStorage.length > 1){
         ligneArticle.className = "ligneArticlePanier"
         sectionBox.appendChild(ligneArticle);
         // ====== on cree une balise a pour pouvoir l'agrandir l'image au clique =======
-        const balAImagePanier = document.createElement('a');
-        balAImagePanier.className = ("aImage");
-        balAImagePanier.setAttribute("src", objJson[i].image);
-        ligneArticle.appendChild(balAImagePanier);
+        const divImagePanier = document.createElement('div');
+        divImagePanier.className = ("boxImagePanier");
+        ligneArticle.appendChild(divImagePanier);
         // ====== on affiche l'image de l'article =======
         const imagePanier = document.createElement('img');
         imagePanier.className = ('imageDuPanier');
         imagePanier.setAttribute("alt", objJson[i].name);
         imagePanier.setAttribute("title", "super appareil photo" + " " + objJson[i].name);
         imagePanier.src += objJson[i].image;
-        balAImagePanier.appendChild(imagePanier); // on insere la balise image dans la balise "a"
+        divImagePanier.appendChild(imagePanier); // on insere la balise image dans la balise "a"
         // ====== on affiche le nom de notre article ====== 
         const divNamePanier = document.createElement('div');
         divNamePanier.className = "divNamePanier";
