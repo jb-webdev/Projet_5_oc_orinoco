@@ -6,7 +6,6 @@
 let paramsString = new URLSearchParams(window.location.search);
 
 const id = paramsString.get("id");
-console.log(id);
 
 //===================== je cree une requete api pour recuperer les données du produit ==========================
 let urlApiProd = "http://localhost:3000/api/cameras"+"/"+ id;  // déclaration de la variable pour l'url choisi

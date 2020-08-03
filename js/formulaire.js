@@ -69,6 +69,69 @@ let ajouterFomrulaire = function () {
     formulaireInput.appendChild(messageErreur);
 };
 // =========================== fin de la fonction ajout formulaire =======================
+// ===========================================================================================
+// =============================  function pour envoi du formulaire de commande =============
+let monstockageUser = localStorage;
+let  fonctionEnvoiFormulmaire = function () {
+
+    lectureObjet = localStorage.getItem("panier"); // je recupere les informations avec la methode get pour controler la presence de mon objet dans le localStorage
+    objJson = JSON.parse(lectureObjet); // je parse les infos pour pouvoir les traiter 
+    // je creer mon array pour les produit à envoyer
+    let idProducs = [];
+    for(i = 0 ; i < objJson.length; i++) {
+        idProducs.push(objJson[i].id);
+    };
+    // ============= format objet pour l'utilisateur ===========================
+    
+    // on cree une variable pour nos objets
+    let contact = {
+        firstName: document.getElementById("inputBoxFormPrenom").value,
+        lastName: document.getElementById("inputBoxFormNom").value,
+        address: document.getElementById("inputBoxFormAdresse").value,
+        city: document.getElementById("inputBoxFormVille").value,
+        email: document.getElementById("inputBoxFormEmail").value
+    }; 
+    //je stock les informations pour le message de remerciments
+    sessionStorage.setItem("firstName", document.getElementById("inputBoxFormPrenom").value);
+    sessionStorage.setItem("lastName", document.getElementById("inputBoxFormNom").value);
+    // console.log (document.getElementById("inputBoxFormPrenom").value);
+    //je creer un class pour le format à envoyer à l'api
+     class formaToSend {  // je cree un constructeur pour preparer l'envoi
+         constructor(contact, idProducs) {
+             this.contact = contact;
+             this.products = idProducs;
+         }
+     };
+    const commandToSend = new formaToSend(contact, idProducs); // je pousse les infos pour l"envoi de la commande
+
+    //  ==================== on envoie la confirmation à l'API ===============
+    let urlApiPost = "http://localhost:3000/api/cameras/order";  // déclaration de la variable pour l'url choisi
+
+    const post = function promiseApi () {              // declare un constante et on rentre une fonction promiseApi
+
+        return new Promise((resolve, reject) => {      // on lui donne deux fonction resolve si elle tiens la promesse et reject si elle ne tiens pas ca promesse
+            const xhrPost = new XMLHttpRequest();      // on utilisse la methode Ajax avec XMLRTTpRequest
+        
+            xhrPost.onreadystatechange = function() {
+                if (this.readyState == XMLHttpRequest.DONE) { // on lui passe les conditions avec if
+                    if(this.status == 200 || this.status == 201){ 
+                        resolve(JSON.parse(this.responseText)); // si c'est bon on retourne le fichier JSON parsé
+                    } else {
+                        reject(xhrPost); // si il y a une erreur on rejette
+                    }
+                }
+            }
+            xhrPost.open("POST", urlApiPost, true);   // on envoi la requete avec l'url concaténée avec true pour la réaliser en asynchrone
+            xhrPost.setRequestHeader("Content-Type", "application/json");
+            xhrPost.send(JSON.stringify(commandToSend));
+        })
+    };
+    
+    post(urlApiPost).then(function(response) {
+        sessionStorage.setItem("orderId", response.orderId);
+    });
+};
+// =========================== fin function pour envoi du formulaire de commande ================
 // =======================================================================================
 // =========================== début de la fonction supprimer formulaire =============================
 // ======== je recupere mes inputs à supprimer
@@ -111,70 +174,15 @@ let supprimerFomrulaire = function () {
     idMain.appendChild(messageLignUne);
     const messageLignDeux = document.createElement('p');
     messageLignDeux.id = "messageLigneDeux";
-    messageLignDeux.innerHTML = "Reference de votre commande : ";
+    messageLignDeux.innerHTML = "Reference de votre commande : " + sessionStorage.getItem("orderId");
     idMain.appendChild(messageLignDeux);
-
+    
     const messageLignTrois = document.createElement('p');
     messageLignTrois.id = "messageLigneTrois";
     messageLignTrois.innerHTML = " Toutes l'équipe d'ORINOCO vous remercie pour votre confiance !"
     idMain.appendChild(messageLignTrois);
 };
 // =========================== fin de la fonction supprimer formulaire =======================
-// ===========================================================================================
-// =============================  function pour envoi du formulaire de commande =============
-let monstockageUser = localStorage;
-let  fonctionEnvoiFormulmaire = function () {
-
-    lectureObjet = localStorage.getItem("panier"); // je recupere les informations avec la methode get pour controler la presence de mon objet dans le localStorage
-    objJson = JSON.parse(lectureObjet); // je parse les infos pour pouvoir les traiter 
-    // je creer mon array pour les produit à envoyer
-    let idProducs = [];
-    for(i = 0 ; i < objJson.length; i++) {
-        idProducs.push(objJson[i].id);
-    };
-    console.log(idProducs); // je controle que les informations sont bien preésente dans mon objet producs
-    // format objet pour l'utilisateur
-    
-    // on cree une variable pour nos objets
-    let contact = {
-        Prénom: document.getElementById("inputBoxFormPrenom").value,
-        nom: document.getElementById("inputBoxFormNom").value,
-        adresse: document.getElementById("inputBoxFormAdresse").value,
-        ville: document.getElementById("inputBoxFormVille").value,
-        email: document.getElementById("inputBoxFormEmail").value
-    }; 
-    console.log(contact);
-    //je stock les informations pour le message de remerciments
-    sessionStorage.setItem("firstName", document.getElementById("inputBoxFormPrenom").value);
-    sessionStorage.setItem("lastName", document.getElementById("inputBoxFormNom").value);
-    // console.log (document.getElementById("inputBoxFormPrenom").value);
-    //je creer un class pour le format à envoyer à l'api
-     class formaToSend {  // je cree un constructeur pour preparer l'envoi
-         constructor(contact, idProducs) {
-             this.contact = contact;
-             this.idProducs = idProducs;
-         }
-     };
-    const commandToSend = new formaToSend(contact, idProducs); // je pousse les infos pour l"envoi de la commande
-    console.log(commandToSend); // je controle que mon objet "commandeToSend" contient bien les infos
-
-    //  ==================== on envoie la confirmation à l'API ===============
-    const xhr = new XMLHttpRequest();
-
-    xhr.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            resolve(JSON.parse(this.responseText));
-            // let response = JSON.parse(this.responseText);
-            // console.log(response);
-        }
-    };
-    xhr.open("POST", "http://localhost:3000/api/cameras/order"), true;
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify(commandToSend));
-
-
-    };
-// =========================== fin function pour envoi du formulaire de commande ================
 //=====================================================================================
 // ========= a l'ouverture de la page j'affiche =======================================
 
@@ -194,9 +202,9 @@ document.querySelector(".btnInputEnvoyerFormulaire").addEventListener("click", f
     let verifVille = document.getElementById("inputBoxFormVille");
     let verifEmail = document.getElementById("inputBoxFormEmail");
     let verifConfirm = document.getElementById("inputBoxFormEmailConfirm");
-// if (verifAdresse.value != verifEmail) {
-//     erreur = "EMAIL DIFFERENT !";
-// }
+if (verifConfirm.value != verifEmail.value) {
+    erreur = "EMAIL DIFFERENT !";
+}
 if (!verifConfirm.value) {
     erreur = "VEUILLEZ CONFIRMER VOTRE EMAIL !";
 }
