@@ -11,7 +11,7 @@ footer {
     width: 100%;
   }
   .text-center {
-    color: $secondary;
+    color: $primary;
     padding-top: 20px;
     padding-bottom: 20px;
     font-size: $fontSize1;
@@ -19,7 +19,7 @@ footer {
   #footer a {
     font-size: $fontSize2;
     text-decoration: none;
-    color: $secondary;
+    color: $primary;
   }
   @media all and (max-width: 680px){
     #footer a {

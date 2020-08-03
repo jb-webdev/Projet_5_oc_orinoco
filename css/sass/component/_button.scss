@@ -1,8 +1,17 @@
 // ==================== Boutons Catalogue / Produits / Panier ====================
 .btn {
     @include button;
-    color: $secondary;
+    
 }
 .btn:hover {
     @include buttonHover;
+}
+.btnInfo {
+    @include button;
+    color: $secondary;
+    
+}
+.btnInfo:hover {
+    @include buttonHover;
+    color: $secondary;
 }
