@@ -48,6 +48,14 @@
   color: #080808;
 }
 
+.btnPanier {
+  color: #080808;
+}
+
+.btnPanier:hover {
+  color: #080808;
+}
+
 .btnNeg {
   background: none;
   color: #ffffff;
