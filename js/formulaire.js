@@ -128,9 +128,11 @@ let  fonctionEnvoiFormulmaire = function () {
     };
     
     post(urlApiPost).then(function(response) {
+        // console.log(response.orderId);
         sessionStorage.setItem("orderId", response.orderId);
     });
 };
+// console.log(orderIdEssai);
 // =========================== fin function pour envoi du formulaire de commande ================
 // =======================================================================================
 // =========================== début de la fonction supprimer formulaire =============================
@@ -172,6 +174,7 @@ let supprimerFomrulaire = function () {
     messageLignUne.id = "messageLigneUne";
     messageLignUne.innerHTML = sessionStorage.getItem("firstName") + " " + sessionStorage.getItem("lastName") + " " + "votre commande d'un montant de : " + sessionStorage.getItem("montantCommande") + " " + " est bien envoyée";
     idMain.appendChild(messageLignUne);
+
     const messageLignDeux = document.createElement('p');
     messageLignDeux.id = "messageLigneDeux";
     messageLignDeux.innerHTML = "Référence de votre commande : " + sessionStorage.getItem("orderId");
