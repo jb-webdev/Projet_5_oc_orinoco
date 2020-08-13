@@ -45,6 +45,9 @@
     align-items: center;
     justify-content: center;
 }
+.imageDuPanier{
+    width: 50%;
+}
 .divNamePanier {
     @include alignDivPanier;
     display: flex;
@@ -94,7 +97,8 @@
     flex: 4;
     text-align: end;
     background-color: $colorBtn ;
-    
+    border-radius: 4px;
+    padding-right: 10px;
 }
 .textMontant{
     background-color: $colorBtn;

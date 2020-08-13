@@ -48,14 +48,6 @@
   color: #080808;
 }
 
-.btnPanier {
-  color: #080808;
-}
-
-.btnPanier:hover {
-  color: #080808;
-}
-
 .btnNeg {
   background: none;
   color: #ffffff;
@@ -485,6 +477,10 @@ form {
   justify-content: center;
 }
 
+.imageDuPanier {
+  width: 50%;
+}
+
 .divNamePanier {
   width: 200px;
   text-align: center;
@@ -544,6 +540,8 @@ form {
   flex: 4;
   text-align: end;
   background-color: #47b947;
+  border-radius: 4px;
+  padding-right: 10px;
 }
 
 .textMontant {
