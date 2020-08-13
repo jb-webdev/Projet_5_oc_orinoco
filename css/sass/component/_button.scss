@@ -15,3 +15,12 @@
     @include buttonHover;
     color: $secondary;
 }
+.btnPanier {
+    @include button;
+    color: $secondary;
+    
+}
+.btnPanier:hover {
+    @include buttonHover;
+    color: $secondary;
+}
