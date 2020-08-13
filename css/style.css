@@ -270,7 +270,7 @@ body {
 }
 
 .newImage {
-  width: 90%;
+  width: 75%;
 }
 
 .boxName {
@@ -353,7 +353,7 @@ body {
 }
 
 .boxSelectionImg {
-  width: 300px;
+  width: 250px;
 }
 
 .inputPanier {
@@ -578,7 +578,7 @@ form {
 }
 @media all and (max-width: 972px) {
   .imageDuPanier {
-    width: 90%;
+    width: 60%;
   }
 
   .calcPanier {

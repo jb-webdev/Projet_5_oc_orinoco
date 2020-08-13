@@ -124,7 +124,10 @@ let  fonctionEnvoiFormulmaire = function () {
         })
     };
     post(urlApiPost).then(function(response) {
+        const messageLignDeux = document.getElementById('messageLigneDeux');
+        messageLignDeux.innerHTML = "Référence de votre commande : " + response.orderId;
         sessionStorage.setItem("orderId", response.orderId);
+        // supprimerFomrulaire(); // on supprime les formulaire et on affiche le message de confirmation de commande avec les remerciments.
     });
 };
 // =========================== fin function pour envoi du formulaire de commande ================
@@ -133,6 +136,7 @@ let  fonctionEnvoiFormulmaire = function () {
 
 // ==== je crée une function pour suprimer et ajouter mon message de remerciments
 let supprimerFomrulaire = function () {
+    
     let suppInputLastame = document.getElementById("inputBoxFormNom");
     let suppInputFirstname = document.getElementById("inputBoxFormPrenom");
     let suppInputAdresse = document.getElementById("inputBoxFormAdresse");
@@ -151,25 +155,16 @@ let supprimerFomrulaire = function () {
     document.getElementById("erreur").innerHTML = "";
 
     // ======== je créer de nouvelles balises pour le message de remerciement
-
-    const paragraphe = document.getElementById("h2Titre");
-    h2Titre.innerHTML = "Validation commande";
-
-    const idMain = document.getElementById("formulaire"); 
-    const messageLignUne = document.createElement('p');
-    messageLignUne.id = "messageLigneUne";
-    messageLignUne.innerHTML = sessionStorage.getItem("firstName") + " " + sessionStorage.getItem("lastName") + " " + "votre commande d'un montant de : " + sessionStorage.getItem("montantCommande") + " " + " est bien envoyée";
-    idMain.appendChild(messageLignUne);
-
-    const messageLignDeux = document.createElement('p');
-    messageLignDeux.id = "messageLigneDeux";
-    messageLignDeux.innerHTML = "Référence de votre commande : " + sessionStorage.getItem("orderId");
-    idMain.appendChild(messageLignDeux);
     
-    const messageLignTrois = document.createElement('p');
-    messageLignTrois.id = "messageLigneTrois";
+    const paragraphe = document.getElementById("h2Titre");
+    paragraphe.innerHTML = "Validation commande !";
+
+    // const idMain = document.getElementById("formulaire"); 
+    const messageLignUne = document.getElementById("messageLigneUne");
+    messageLignUne.innerHTML = sessionStorage.getItem("firstName") + " " + sessionStorage.getItem("lastName") + " " + "votre commande d'un montant de : " + sessionStorage.getItem("montantCommande") + " " + " est bien envoyée";
+    
+    const messageLignTrois = document.getElementById('messageLigneTrois');
     messageLignTrois.innerHTML = " Toutes l'équipe d'ORINOCO vous remercie pour votre confiance !"
-    idMain.appendChild(messageLignTrois);
 };
 // =========================== fin de la fonction pour supprimer les formulaires =======================
 
