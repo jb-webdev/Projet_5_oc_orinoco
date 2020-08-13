@@ -1,6 +1,3 @@
-// ==== je creer mes fonctions pour la pages en cours =============
-//=================================================================
-
 // je crée une fonction pour les formulaires.
 let ajouterFomrulaire = function () {
     // === j'affiche un message dans la balise h2
@@ -126,34 +123,23 @@ let  fonctionEnvoiFormulmaire = function () {
             xhrPost.send(JSON.stringify(commandToSend));
         })
     };
-    
     post(urlApiPost).then(function(response) {
-        // console.log(response.orderId);
         sessionStorage.setItem("orderId", response.orderId);
     });
 };
-// console.log(orderIdEssai);
 // =========================== fin function pour envoi du formulaire de commande ================
 // =======================================================================================
 // =========================== début de la fonction supprimer formulaire =============================
-// ======== je récupère les formulaires à supprimer
-let suppInputLastame = document.getElementById("inputBoxFormNom");
-let suppInputFirstname = document.getElementById("inputBoxFormPrenom");
-let suppInputAdresse = document.getElementById("inputBoxFormAdresse");
-let suppInputCity = document.getElementById("inputBoxFormVille");
-let suppInputEmail = document.getElementById("inputBoxFormEmail");
-let suppInputEmail2 = document.getElementById("inputBoxFormEmailConfirm");
-let suppInputbutton = document.querySelector(".btnInputEnvoyerFormulaire");
 
 // ==== je crée une function pour suprimer et ajouter mon message de remerciments
 let supprimerFomrulaire = function () {
-    suppInputLastame = document.getElementById("inputBoxFormNom");
-    suppInputFirstname = document.getElementById("inputBoxFormPrenom");
-    suppInputAdresse = document.getElementById("inputBoxFormAdresse");
-    suppInputCity = document.getElementById("inputBoxFormVille");
-    suppInputEmail = document.getElementById("inputBoxFormEmail");
-    suppInputEmail2 = document.getElementById("inputBoxFormEmailConfirm");
-    suppInputbutton = document.querySelector(".btnInputEnvoyerFormulaire");
+    let suppInputLastame = document.getElementById("inputBoxFormNom");
+    let suppInputFirstname = document.getElementById("inputBoxFormPrenom");
+    let suppInputAdresse = document.getElementById("inputBoxFormAdresse");
+    let suppInputCity = document.getElementById("inputBoxFormVille");
+    let suppInputEmail = document.getElementById("inputBoxFormEmail");
+    let suppInputEmail2 = document.getElementById("inputBoxFormEmailConfirm");
+    let suppInputbutton = document.querySelector(".btnInputEnvoyerFormulaire");
 
     suppInputLastame.remove(); // on supprime l'élèments choisi.
     suppInputFirstname.remove();
@@ -164,7 +150,7 @@ let supprimerFomrulaire = function () {
     suppInputbutton.remove();
     document.getElementById("erreur").innerHTML = "";
 
-    // ======== je créer de nouvelles balises pour le message de remerciment
+    // ======== je créer de nouvelles balises pour le message de remerciement
 
     const paragraphe = document.getElementById("h2Titre");
     h2Titre.innerHTML = "Validation commande";
@@ -186,7 +172,7 @@ let supprimerFomrulaire = function () {
     idMain.appendChild(messageLignTrois);
 };
 // =========================== fin de la fonction pour supprimer les formulaires =======================
-//=====================================================================================
+
 // ========= à l'ouverture de la page on affiche =======================================
 
 // ========== la quantité d'article dans le panier ==============================
@@ -195,46 +181,44 @@ document.querySelector('.panierNav').innerHTML = "Retour";
 // ========== les formulaires ========================================
 let affichage = ajouterFomrulaire(); // on affiche le formulaire à l'ouverture de la page.
 
-//  ===================================   verification formulaire ========================================
+//  ==========  verification formulaire ========================================
 
 document.querySelector(".btnInputEnvoyerFormulaire").addEventListener("click", function() {
-    let erreur;
-    let verifPrenom = document.getElementById("inputBoxFormPrenom");
-    let verifNom = document.getElementById("inputBoxFormNom");
-    let verifAdresse = document.getElementById("inputBoxFormAdresse");
-    let verifVille = document.getElementById("inputBoxFormVille");
-    let verifEmail = document.getElementById("inputBoxFormEmail");
-    let verifConfirm = document.getElementById("inputBoxFormEmailConfirm");
-if (verifConfirm.value != verifEmail.value) { // si l'email de confirmation et diffèrent de l'email, alors on affiche le message d'erreur.
-    erreur = "EMAIL DIFFERENT !";
-}
-if (!verifConfirm.value) { // si le champ email de confirmation, n'est pas rempli alors on affiche le message d'erreur.
-    erreur = "VEUILLEZ CONFIRMER VOTRE EMAIL !";
-}
-if (!verifEmail.value) {
-    erreur = "VEUILLEZ RENSEIGNER VOTRE EMAIL !";
-}
-if (!verifVille.value) {
-    erreur = "VEUILLEZ RENSEIGNER VOTRE VILLE !";
-}
-if (!verifAdresse.value) {
-    erreur = "VEUILLEZ RENSEIGNER VOTRE ADRESSE !";
-}
-if (!verifPrenom.value) {
-    erreur = "VEUILLEZ RENSEIGNER VOTRE PRENOM !";
-}
-if (!verifNom.value) {
-    erreur = "VEUILLEZ RENSEIGNER VOTRE NOM !";
-}
-if (erreur) {
-    document.getElementById("erreur").innerHTML = erreur;
-} else {
-    // ==== si tous est bon j'envoie la demande et j'affiche les remerciment et j'efface le localstorage ==============
-    fonctionEnvoiFormulmaire(); // on lance la demande avec la méthode "POST"
-    supprimerFomrulaire(); // on supprime les formulaire et on affiche le message de confirmation de commande avec les remerciments.
-    localStorage.clear(); // on vide le localstorage.
-    sessionStorage.clear(); // on vide le sessionStorage
-}
+        let erreur;
+        let verifPrenom = document.getElementById("inputBoxFormPrenom");
+        let verifNom = document.getElementById("inputBoxFormNom");
+        let verifAdresse = document.getElementById("inputBoxFormAdresse");
+        let verifVille = document.getElementById("inputBoxFormVille");
+        let verifEmail = document.getElementById("inputBoxFormEmail");
+        let verifConfirm = document.getElementById("inputBoxFormEmailConfirm");
+    if (verifConfirm.value != verifEmail.value) { // si l'email de confirmation et diffèrent de l'email, alors on affiche le message d'erreur.
+        erreur = "EMAIL DIFFERENT !";
+    }
+    if (!verifConfirm.value) { // si le champ email de confirmation, n'est pas rempli alors on affiche le message d'erreur.
+        erreur = "VEUILLEZ CONFIRMER VOTRE EMAIL !";
+    }
+    if (!verifEmail.value) {
+        erreur = "VEUILLEZ RENSEIGNER VOTRE EMAIL !";
+    }
+    if (!verifVille.value) {
+        erreur = "VEUILLEZ RENSEIGNER VOTRE VILLE !";
+    }
+    if (!verifAdresse.value) {
+        erreur = "VEUILLEZ RENSEIGNER VOTRE ADRESSE !";
+    }
+    if (!verifPrenom.value) {
+        erreur = "VEUILLEZ RENSEIGNER VOTRE PRENOM !";
+    }
+    if (!verifNom.value) {
+        erreur = "VEUILLEZ RENSEIGNER VOTRE NOM !";
+    }
+    if (erreur) {
+        document.getElementById("erreur").innerHTML = erreur;
+    } else {
+        // ==== si tous est bon j'envoie la demande et j'affiche les remerciements et j'efface le localstorage ==============
+        fonctionEnvoiFormulmaire(); // on lance la demande avec la méthode "POST"
+        supprimerFomrulaire(); // on supprime les formulaire et on affiche le message de confirmation de commande avec les remerciments.
+        localStorage.clear(); // on vide le localstorage.
+        sessionStorage.clear(); // on vide le sessionStorage
+    }
 });
-
-// ======================== fin verification formulaires ==============================

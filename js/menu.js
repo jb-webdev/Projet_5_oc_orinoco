@@ -1,31 +1,6 @@
-//==================================== on lance la requête vers l'api avec AJAX  ==============================================================
-let urlApi = "http://localhost:3000/api/cameras";  // déclaration de la variable pour l'url choisi
+//==================================== on rècupere les réponses de notre requête et on les affiche ======================================
+get(urlApi()).then(function(response) {
 
-const get = function promiseApi () {              // on déclare une constante et on rentre une fonction promiseApi
-
-    return new Promise((resolve, reject) => {      // on lui donne deux fonctions resolve si elle tiens la promesse et reject si elle ne tiens pas ça promesse
-        const xhr = new XMLHttpRequest();      // on utilisse la méthode Ajax avec XMLRTTpRequest
-       
-        xhr.onreadystatechange = function() {
-            if (this.readyState == XMLHttpRequest.DONE) { // on lui passe les conditions avec un if
-                if(this.status == 200){ 
-                    // console.log(this.status);
-                    resolve(JSON.parse(this.responseText)); // si c'est bon on retourne le fichier JSON parsé
-                // console.log(this.responseText);         // // on verifie la réponse du fichier JSON
-                } else {
-                    reject(xhr); // si il y a une erreur on rejette
-                }
-            }
-        }
-        xhr.open("GET", urlApi, true);   // on envoi la requête avec l'url concaténée avec true pour la réaliser en asynchrone
-        xhr.send(); // on envoie la requête
-    })
-};
-
-
-//==================================== on rècupere les réponses notre requête et on affiche les réponses ======================================
-get(urlApi).then(function(response) {
-//    console.log(response); // on contrôle la présence des objets à utilisés avant la boucle
       for (i = 0; i < response.length; i++) {
             const container = document.getElementById("catalogue");           
             const newBox = document.createElement("div");
@@ -63,8 +38,7 @@ get(urlApi).then(function(response) {
             newBoxBtn.appendChild(btnInfo); // on insert notre balise "a" dans la div.
             }
 
-});     //à ce stade les balises 'div' sont insérées avec les réponses de notre requête.
-document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
+}); 
 
-
-
+// ============== affichage quantite panier ========================
+headerPanier();
