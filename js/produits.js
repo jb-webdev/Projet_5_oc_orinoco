@@ -10,12 +10,17 @@ if (id != null){
         prodSel.appendChild(boxSel);        // j'insère ma div dans la section.
     
         // === création d'une balise pour l'image ===
-        const divBoxSelmg = document.createElement('img');
+        const divBoxSelmg = document.createElement('div');
         divBoxSelmg.className = 'boxSelectionImg';
-        divBoxSelmg.setAttribute("alt", response.name);
-        divBoxSelmg.setAttribute("title", "super appareil photo" + " " + response.name);
-        divBoxSelmg.src = response.imageUrl;
         boxSel.appendChild(divBoxSelmg);
+
+
+        const imageSelection = document.createElement('img');
+        imageSelection.className = 'imgSelection';
+        imageSelection.setAttribute("alt", response.name);
+        imageSelection.setAttribute("title", "super appareil photo" + " " + response.name);
+        imageSelection.src = response.imageUrl;
+        divBoxSelmg.appendChild(imageSelection);
                 
         // === création d'une balise pour le nom du produit ===
         const divBoxName = document.createElement('p');
