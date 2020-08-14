@@ -24,3 +24,10 @@
     
     color: $secondary;
 }
+.btnNavPanier {
+    @include button;
+}
+.btnNavPanier:hover {
+    @include buttonHover;
+    color: #b10505;
+}

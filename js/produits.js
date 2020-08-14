@@ -116,92 +116,92 @@ if (id != null){
         });
     
     
-        // =========== on récupère les valeurs pour crée notre ligne panier ============
+// =========== on récupère les valeurs pour crée notre ligne panier ============
     
-        let monStockage = localStorage;
-        let windowImageArticle = response.imageUrl; // on crée des variables pour stocker nos données articles pour les réutiliser plus tard.
-        let windowNameArticle = response.name;
-        let windowPriceArticle = response.price/100;
-    
-        let panier = []; // on crée une variable pour nos objets.
-    
-        class Objs {        // je crée une class pour stocker mes informations article.
-            constructor (id, image, nom, prix, quantite) {
-                this.id = id;
-                this.image = image;
-                this.name = nom;
-                this.price = prix;
-                this.quantite = quantite
-            }
-        } 
-        //je déclare les variables
-        let lectureQuantite;
-        let recupQuantiteLocal;
-        let premierObj;
-        let deuxiemeObj;
-    
-        let objsUn;
-    
-        let lectureObjet;  // on crée une variable pour récuperer notre objet du localstorage.
-        let objJson;  // on parse l'objet pour pouvoir le traiter.
-        // j'utilise un écouteur d'evenements pour ajouter les informations choisi par l'utilisateur
-    
-        document.querySelector(".btnPanier").addEventListener('click', function() {
-            if (monStockage.length == 0) {
-                premierObj = new Objs (
-                    id,
-                    windowImageArticle,
-                    windowNameArticle,
-                    windowPriceArticle,
-                    inputBtnQuantite.innerHTML
+let monStockage = localStorage;
+let windowImageArticle = response.imageUrl; // on crée des variables pour stocker nos données articles pour les réutiliser plus tard.
+let windowNameArticle = response.name;
+let windowPriceArticle = response.price/100;
+
+let panier = []; // on crée une variable pour nos objets.
+
+class Objs {        // je crée une class pour stocker mes informations article.
+    constructor (id, image, nom, prix, quantite) {
+        this.id = id;
+        this.image = image;
+        this.name = nom;
+        this.price = prix;
+        this.quantite = quantite
+    }
+} 
+//je déclare les variables
+let lectureQuantite;
+let recupQuantiteLocal;
+let premierObj;
+let deuxiemeObj;
+
+let objsUn;
+
+let lectureObjet;  // on crée une variable pour récuperer notre objet du localstorage.
+let objJson;  // on parse l'objet pour pouvoir le traiter.
+// j'utilise un écouteur d'evenements pour ajouter les informations choisi par l'utilisateur
+
+document.querySelector(".btnPanier").addEventListener('click', function() {
+    if (monStockage.length == 0) {
+        premierObj = new Objs (
+            id,
+            windowImageArticle,
+            windowNameArticle,
+            windowPriceArticle,
+            inputBtnQuantite.innerHTML
+        )
+        panier.push(premierObj); // je pousse les infos pour créer mon objet avec la classe Objs.
+        localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier".
+        lectureObjet = localStorage.getItem("panier"); // je récupère les informations avec la méthode get pour contrôler la présernce de mon objet dans le localStorage
+        objJson = JSON.parse(lectureObjet); // je parse les infos pour pouvoir les traiter.
+        // on affiche la quantité au panier
+        localStorage.setItem("quantite", panier.length);
+        lectureQuantite = localStorage.getItem("quantite");
+        // on affiche le nombre d'article dans le panier nav.
+        document.querySelector('.panierNav').innerHTML = lectureQuantite;
+
+    }else if (monStockage.length > 0) {
+        lectureObjet = localStorage.getItem("panier"); // je récupère les informations avec la méthode get pour contrôler la présence de mon objet dans le localStorage.
+        objJson = JSON.parse(lectureObjet); // je parse les infos pour pouvoir les traiter.
+        
+        
+            for(i = 0 ; i < objJson.length; i++) {
+                objsUn = new Objs (
+                    objJson[i].id,
+                    objJson[i].image,
+                    objJson[i].name,
+                    objJson[i].price,
+                    objJson[i].quantite
                 )
-                panier.push(premierObj); // je pousse les infos pour créer mon objet avec la classe Objs.
-                localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier".
-                lectureObjet = localStorage.getItem("panier"); // je récupère les informations avec la méthode get pour contrôler la présernce de mon objet dans le localStorage
-                objJson = JSON.parse(lectureObjet); // je parse les infos pour pouvoir les traiter.
-                // on affiche la quantité au panier
-                localStorage.setItem("quantite", panier.length);
-                lectureQuantite = localStorage.getItem("quantite");
-                // on affiche le nombre d'article dans le panier nav.
-                document.querySelector('.panierNav').innerHTML = lectureQuantite;
-    
-            }else if (monStockage.length > 0) {
-                lectureObjet = localStorage.getItem("panier"); // je récupère les informations avec la méthode get pour contrôler la présence de mon objet dans le localStorage.
-                objJson = JSON.parse(lectureObjet); // je parse les infos pour pouvoir les traiter.
-                
-                
-                    for(i = 0 ; i < objJson.length; i++) {
-                        objsUn = new Objs (
-                            objJson[i].id,
-                            objJson[i].image,
-                            objJson[i].name,
-                            objJson[i].price,
-                            objJson[i].quantite
-                        )
-                        panier.push(objsUn);
-                    }
-                    deuxiemeObj = new Objs (
-                        id,
-                        windowImageArticle,
-                        windowNameArticle,
-                        windowPriceArticle,
-                        inputBtnQuantite.innerHTML
-                    )
-                    panier.push(deuxiemeObj);
-                    localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier" 
-                    recupQuantiteLocal = localStorage.getItem("quantite"),
-    
-                    // console.log(recupQuantiteLocal);
-                    recupQuantiteLocal ++;
-                    localStorage.setItem("quantite", recupQuantiteLocal);
-                    document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
-    
+                panier.push(objsUn);
             }
-        })
-    });
-    
+            deuxiemeObj = new Objs (
+                id,
+                windowImageArticle,
+                windowNameArticle,
+                windowPriceArticle,
+                inputBtnQuantite.innerHTML
+            )
+            panier.push(deuxiemeObj);
+            localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier" 
+            recupQuantiteLocal = localStorage.getItem("quantite"),
+
+            // console.log(recupQuantiteLocal);
+            recupQuantiteLocal ++;
+            localStorage.setItem("quantite", recupQuantiteLocal);
+            document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
+
+    }
+})
+});
+
 } else {
-    document.querySelector(".h2Main").innerHTML = "Aucun produit sélectionner !";
+document.querySelector(".h2Main").innerHTML = "Aucun produit sélectionner !";
 };
 headerPanier();
 
