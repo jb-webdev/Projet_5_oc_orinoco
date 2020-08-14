@@ -4,7 +4,7 @@
 
 let lectureObjet = localStorage.getItem("panier"); // on crée une variable pour récupèrer notre objet du localstorage.
 let objJson = JSON.parse(lectureObjet); // on parse l'objet pour pouvoir le traiter.
-// console.log(objJson); // on contrôle la présence de l'objet aux format JSON.
+
 // ==========  je crée une variable pour le montant du panier ===========
 let somme = 0;
 function calculSomme(){
@@ -13,13 +13,14 @@ function calculSomme(){
     }
 }
 calculSomme();
+// on vide le panier
 document.querySelector('.btnPanier').addEventListener("click", function() {
     localStorage.clear ("panier");
     localStorage.clear ("quantite");
 });
 
 
-if (localStorage.length > 1){ //si localStorage.length est supérieur a 1
+if (localStorage.length > 1){ //si localStorage.length est supérieur à 1
 
     document.querySelector('.h2Main').innerHTML = "Votre panier !"; // on affiche le message de la page.
 

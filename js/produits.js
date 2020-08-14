@@ -116,7 +116,7 @@ if (id != null){
         });
     
     
-// =========== on récupère les valeurs pour crée notre ligne panier ============
+    // =========== on récupère les valeurs pour crée notre ligne panier ============
     
 let monStockage = localStorage;
 let windowImageArticle = response.imageUrl; // on crée des variables pour stocker nos données articles pour les réutiliser plus tard.
@@ -146,30 +146,28 @@ let lectureObjet;  // on crée une variable pour récuperer notre objet du local
 let objJson;  // on parse l'objet pour pouvoir le traiter.
 // j'utilise un écouteur d'evenements pour ajouter les informations choisi par l'utilisateur
 
-document.querySelector(".btnPanier").addEventListener('click', function() {
-    if (monStockage.length == 0) {
-        premierObj = new Objs (
-            id,
-            windowImageArticle,
-            windowNameArticle,
-            windowPriceArticle,
-            inputBtnQuantite.innerHTML
-        )
-        panier.push(premierObj); // je pousse les infos pour créer mon objet avec la classe Objs.
-        localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier".
-        lectureObjet = localStorage.getItem("panier"); // je récupère les informations avec la méthode get pour contrôler la présernce de mon objet dans le localStorage
-        objJson = JSON.parse(lectureObjet); // je parse les infos pour pouvoir les traiter.
-        // on affiche la quantité au panier
-        localStorage.setItem("quantite", panier.length);
-        lectureQuantite = localStorage.getItem("quantite");
-        // on affiche le nombre d'article dans le panier nav.
-        document.querySelector('.panierNav').innerHTML = lectureQuantite;
+    document.querySelector(".btnPanier").addEventListener('click', function() {
+        if (monStockage.length == 0) {
+            premierObj = new Objs (
+                id,
+                windowImageArticle,
+                windowNameArticle,
+                windowPriceArticle,
+                inputBtnQuantite.innerHTML
+            )
+            panier.push(premierObj); // je pousse les infos pour créer mon objet avec la classe Objs.
+            localStorage.setItem("panier", JSON.stringify(panier)); // je pousse les valeurs de mon Objet panier dans le localStarage avec la clé "panier".
+            lectureObjet = localStorage.getItem("panier"); // je récupère les informations avec la méthode get pour contrôler la présernce de mon objet dans le localStorage
+            objJson = JSON.parse(lectureObjet); // je parse les infos pour pouvoir les traiter.
+            // on affiche la quantité au panier
+            localStorage.setItem("quantite", panier.length);
+            lectureQuantite = localStorage.getItem("quantite");
+            // on affiche le nombre d'article dans le panier nav.
+            document.querySelector('.panierNav').innerHTML = lectureQuantite;
 
-    }else if (monStockage.length > 0) {
-        lectureObjet = localStorage.getItem("panier"); // je récupère les informations avec la méthode get pour contrôler la présence de mon objet dans le localStorage.
-        objJson = JSON.parse(lectureObjet); // je parse les infos pour pouvoir les traiter.
-        
-        
+        }else if (monStockage.length > 0) {
+            lectureObjet = localStorage.getItem("panier"); // je récupère les informations avec la méthode get pour contrôler la présence de mon objet dans le localStorage.
+            objJson = JSON.parse(lectureObjet); // je parse les infos pour pouvoir les traiter.
             for(i = 0 ; i < objJson.length; i++) {
                 objsUn = new Objs (
                     objJson[i].id,
@@ -195,9 +193,9 @@ document.querySelector(".btnPanier").addEventListener('click', function() {
             recupQuantiteLocal ++;
             localStorage.setItem("quantite", recupQuantiteLocal);
             document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
-
-    }
-})
+        }
+        window.location.href = "index.html"; //on retourne à notre page produits
+    })
 });
 
 } else {
