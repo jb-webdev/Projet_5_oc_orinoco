@@ -4,8 +4,15 @@
     flex-direction: row;
     justify-content: space-evenly;
   }
+#nav-bar-Menu{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin-right: 20%;
   
-  .fas {
-    padding-left: 10px;
-  }
+}
+
+.fas {
+  padding-left: 10px;
+}
    

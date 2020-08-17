@@ -256,6 +256,13 @@ body {
   justify-content: space-evenly;
 }
 
+#nav-bar-Menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin-right: 20%;
+}
+
 .fas {
   padding-left: 10px;
 }
@@ -523,6 +530,7 @@ form {
   width: 200px;
   text-align: center;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }

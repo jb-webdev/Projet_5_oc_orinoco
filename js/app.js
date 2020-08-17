@@ -32,11 +32,14 @@ const get = function promiseApi () {              // on déclare une constante e
 };
 // ============================  fin de la requete ajax  ========================
 
-// ============= on crée un function pour la quantité du panier dans le header
+// ============= on crée une function pour la quantité du panier dans le header =================
 const headerPanier = function() {
-    document.querySelector('.panierNav').innerHTML = localStorage.getItem("quantite");
+    if (JSON.parse(localStorage.getItem("quantite")) === null){
+        document.querySelector('.panierNav').innerHTML = "vide";
+    }else {
+        document.querySelector(".panierNav").innerHTML = JSON.parse(localStorage.getItem("quantite"));
+    }
 };
-
 
 
 

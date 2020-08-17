@@ -5,6 +5,7 @@
 let lectureObjet = localStorage.getItem("panier"); // on crée une variable pour récupèrer notre objet du localstorage.
 let objJson = JSON.parse(lectureObjet); // on parse l'objet pour pouvoir le traiter.
 
+
 // ==========  je crée une variable pour le montant du panier ===========
 let somme = 0;
 function calculSomme(){
@@ -19,8 +20,7 @@ document.querySelector('.btnPanier').addEventListener("click", function() {
     localStorage.clear ("quantite");
 });
 
-
-if (localStorage.length > 1){ //si localStorage.length est supérieur à 1
+if (localStorage.length >= 1){ //si localStorage.length est supérieur à 1
 
     document.querySelector('.h2Main').innerHTML = "Votre panier !"; // on affiche le message de la page.
 
@@ -90,18 +90,26 @@ if (localStorage.length > 1){ //si localStorage.length est supérieur à 1
         // ====== on affiche l'image de l'article =======
         const imagePanier = document.createElement('img');
         imagePanier.className = ('imageDuPanier');
-        imagePanier.setAttribute("alt", objJson[i].name);
+        imagePanier.setAttribute("alt", objJson[i].urlImage);
         imagePanier.setAttribute("title", "super appareil photo" + " " + objJson[i].name);
-        imagePanier.src += objJson[i].image;
+        imagePanier.src += objJson[i].urlImage;
         divImagePanier.appendChild(imagePanier); // on insère la balise image dans la "div"
         // ====== on affiche le nom de notre article ====== 
         const divNamePanier = document.createElement('div');
         divNamePanier.className = "divNamePanier";
         ligneArticle.appendChild(divNamePanier);
+
         const namePanier = document.createElement("p");
         namePanier.className = ("namePanier");
-        namePanier.innerHTML = objJson[i].name; 
+        namePanier.innerHTML = objJson[i].nom; 
         divNamePanier.appendChild(namePanier);
+
+        // on affiche l'option de l'article
+        const optionPanier = document.createElement("p");
+        optionPanier.className = ("optionPanier");
+        optionPanier.innerHTML = "Option :" + " " + objJson[i].option; 
+        divNamePanier.appendChild(optionPanier);
+
         // ====== on affiche le prix de notre article ======
         const divPricePanier = document.createElement('div');
         divPricePanier.className = "divPricePanier";

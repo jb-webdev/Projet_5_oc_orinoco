@@ -127,7 +127,6 @@ let  fonctionEnvoiFormulmaire = function () {
         const messageLignDeux = document.getElementById('messageLigneDeux');
         messageLignDeux.innerHTML = "Référence de votre commande : " + response.orderId;
         sessionStorage.setItem("orderId", response.orderId);
-        // supprimerFomrulaire(); // on supprime les formulaire et on affiche le message de confirmation de commande avec les remerciments.
     });
 };
 // =========================== fin function pour envoi du formulaire de commande ================
@@ -159,7 +158,6 @@ let supprimerFomrulaire = function () {
     const paragraphe = document.getElementById("h2Titre");
     paragraphe.innerHTML = "Validation commande !";
 
-    // const idMain = document.getElementById("formulaire"); 
     const messageLignUne = document.getElementById("messageLigneUne");
     messageLignUne.innerHTML = sessionStorage.getItem("firstName") + " " + sessionStorage.getItem("lastName") + " " + "votre commande d'un montant de : " + sessionStorage.getItem("montantCommande") + " " + " est bien envoyée";
     
