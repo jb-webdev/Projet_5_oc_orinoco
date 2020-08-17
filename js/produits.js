@@ -1,5 +1,5 @@
 // // ===================    on récupère l'id produit dans l'adresse URL =========== 
-if (id != null){
+if (idUrl != null){
     get(urlApi).then(function(response) {
 
         document.querySelector(".h2Main").innerHTML = "Votre sélection";
@@ -118,7 +118,7 @@ if (id != null){
     
     
         // =========== on récupère les valeurs pour crée notre ligne panier ============
-        const idligne = id;
+        const id = idUrl;
         const quantite = document.querySelector(".inputPanier").innerHTML; // on récupère la quantité produit
         const option = document.querySelector('.option').value; // on récupère l'option du produit
         const name = response.name; // on écupèree le nom du produit
@@ -127,8 +127,8 @@ if (id != null){
         const description = response.description; // on récupère la déscription du produit
         // je crée une class pour mon objet
         class ligneDuPanier {
-            constructor(idligne, name, quantite, option, price, urlImage, description) {
-                this.idligne = id;
+            constructor(id, name, quantite, option, price, urlImage, description) {
+                this.id = id;
                 this.nom = name;
                 this.quantite = quantite;
                 this.option = option;
@@ -148,7 +148,7 @@ if (id != null){
             
                 if (localStorage.getItem("panier") === null) { //si le panier d'origine est null alors on écrit dans le Localstorage
 
-                    const ligne = new ligneDuPanier(idligne, name, quantiteAjout, option, price, urlImage, description);
+                    const ligne = new ligneDuPanier(id, name, quantiteAjout, option, price, urlImage, description);
                     let Panier = [];
                     
                     Panier.push(ligne); // je pouse les renseigneemnt dans le localstorage
@@ -163,28 +163,27 @@ if (id != null){
 
                     let produitTrouve = false;
                     for (let x in dataPanier) {
-                        if (dataPanier[x].idligne == id && dataPanier[x].option === option) {
+                        if (dataPanier[x].id == idUrl && dataPanier[x].option === option) {
                 
                             produitTrouve = true;
 
                             // j'augmente la quantité de mon porduit
                             dataPanier[x].quantite = Number(dataPanier[x].quantite) + Number(document.querySelector(".inputPanier").innerHTML);
-                            // dataPanier[x].option = dataPanier[x].option + ", et " + option;
                         }
-                    }
+                    };
                     if (!produitTrouve) {
-                        const ligne = new ligneDuPanier(idligne, name, quantiteAjout, option, price, urlImage, description);
+                        const ligne = new ligneDuPanier(id, name, quantiteAjout, option, price, urlImage, description);
                         dataPanier.push(ligne);
-                    }
+                    };
 
                     // Sauvegarde notre ligne panier et notre quantité panier
                     localStorage.setItem("panier", JSON.stringify(dataPanier));  
                     localStorage.setItem("quantite", JSON.stringify(dataPanier.length));
                     
-                }
+                };
                 window.location.href = "index.html"; //on retourne à notre page produits
-            }
-        }) 
+            };
+        });
     });
     
 } else {

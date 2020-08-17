@@ -1,13 +1,13 @@
 //========= on gere les URLs  =================
 const paramsString = new URLSearchParams(window.location.search);
 
-const id = paramsString.get("id");
+const idUrl = paramsString.get("id");
 
 const urlApi = function (){
-    if (id == null){
+    if (idUrl == null){
         return  "http://localhost:3000/api/cameras";
     } else {
-        return "http://localhost:3000/api/cameras/" + id;
+        return "http://localhost:3000/api/cameras/" + idUrl;
     };
 };
 

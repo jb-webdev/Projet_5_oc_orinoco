@@ -71,8 +71,9 @@ let ajouterFomrulaire = function () {
 
 let  fonctionEnvoiFormulmaire = function () {
 
-    lectureObjet = localStorage.getItem("panier"); // je récupère les informations avec la méthode get pour contrôler la présence de mon objet dans le localStorage.
+    lectureObjet = localStorage.getItem("panier"); // je récupère les informations avec la méthode get dans le localStorage.
     objJson = JSON.parse(lectureObjet); // je parse les infos pour pouvoir les traiter. 
+
     // je créer mon array pour les produit à envoyer.
     let idProducs = [];
     for(i = 0 ; i < objJson.length; i++) {
@@ -126,6 +127,7 @@ let  fonctionEnvoiFormulmaire = function () {
     post(urlApiPost).then(function(response) {
         const messageLignDeux = document.getElementById('messageLigneDeux');
         messageLignDeux.innerHTML = "Référence de votre commande : " + response.orderId;
+        
         sessionStorage.setItem("orderId", response.orderId);
     });
 };
