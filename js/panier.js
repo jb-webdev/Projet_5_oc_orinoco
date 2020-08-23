@@ -14,9 +14,9 @@ function calculSomme(){
         somme += objJson[i].price * objJson[i].quantite; 
     }
     return somme;
-}
-calculSomme();
-console.log(calculSomme);
+};
+
+
 // on vide le panier
 document.querySelector('.btnPanier').addEventListener("click", function() {
     localStorage.clear ("panier");
@@ -24,7 +24,7 @@ document.querySelector('.btnPanier').addEventListener("click", function() {
 });
 
 if (localStorage.length >= 1){ //si localStorage.length est supérieur à 1
-
+    calculSomme();
     document.querySelector('.h2Main').innerHTML = "Votre panier !"; // on affiche le message de la page.
 
     const sectionBox = document.getElementById("tableauPanier"); // on récupère notre élément section.
@@ -174,7 +174,7 @@ if (localStorage.length >= 1){ //si localStorage.length est supérieur à 1
 
         const paragrapheFormMontantP = document.createElement('p');
         paragrapheFormMontantP.className = "formMontantP";
-        paragrapheFormMontantP.innerHTML = somme + ' ' + '€';
+        paragrapheFormMontantP.innerHTML = calculSomme() + ' ' + '€';
         divBoxResultatMontant.appendChild(paragrapheFormMontantP);
         montantStockage = paragrapheFormMontantP.innerHTML;
         
