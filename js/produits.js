@@ -187,7 +187,7 @@ if (idUrl != null){
     });
     
 } else {
-    document.querySelector(".h2Main").innerHTML = "Aucun produit sélectionner !";
+    document.querySelector(".h2Main").innerHTML = "Aucun produit sélectionné !";
 };
 headerPanier();
 
