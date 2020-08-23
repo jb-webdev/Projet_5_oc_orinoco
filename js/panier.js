@@ -7,13 +7,16 @@ let objJson = JSON.parse(lectureObjet); // on parse l'objet pour pouvoir le trai
 
 
 // ==========  je crée une variable pour le montant du panier ===========
-let somme = 0;
+
 function calculSomme(){
+    let somme = 0;
     for (i = 0; i< objJson.length; i++){
         somme += objJson[i].price * objJson[i].quantite; 
     }
+    return somme;
 }
 calculSomme();
+console.log(calculSomme);
 // on vide le panier
 document.querySelector('.btnPanier').addEventListener("click", function() {
     localStorage.clear ("panier");
