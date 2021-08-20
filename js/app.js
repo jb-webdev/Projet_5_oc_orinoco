@@ -21,6 +21,7 @@ const get = function promiseApi () {              // on déclare une constante e
             if (this.readyState == XMLHttpRequest.DONE) { // on lui passe les conditions avec un if
                 if(this.status == 200){
                     resolve(JSON.parse(this.responseText)); // si c'est bon on retourne le fichier JSON parsé
+                    console.log(this.responseText)
                 } else {
                     reject(xhr); // si il y a une erreur on rejette
                 }
